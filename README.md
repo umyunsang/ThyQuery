@@ -9,7 +9,11 @@
 
 ---
 
-Your coding agent never asks what you meant. It picks an interpretation, silently, and builds.
+In Plato's *Meno*, a young man opens by asking Socrates a direct question: can virtue be taught?
+
+Socrates does not answer it. He asks a question back — what *is* virtue? You cannot say whether a thing can be taught, he argues, until you know what the thing is.
+
+Your coding agent has the opposite reflex. Told to *make the onboarding flow better*, it never asks what **better** means here. It picks one meaning, silently, and builds.
 
 **ThyQuery makes it ask first** — one question, about the one thing that would change the plan. Your answer goes to the agent's own planner. Then it stops.
 
