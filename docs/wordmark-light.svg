@@ -6,6 +6,6 @@
     <text x="252" y="104" font-size="72" font-weight="400" letter-spacing="24.5" fill-opacity="0.62">query</text>
   </g>
   <rect x="41" y="138" width="504" height="1" fill="#14110E" fill-opacity="0.2"/>
-  <text x="40" y="180" font-size="30" letter-spacing="6.2" fill="#14110E" fill-opacity="0.45"
+  <text x="296.1" y="180" font-size="30" letter-spacing="6.2" text-anchor="middle" fill="#14110E" fill-opacity="0.45"
         font-family="'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Nanum Gothic', 'AppleGothic', sans-serif">그대의 질의</text>
 </svg>

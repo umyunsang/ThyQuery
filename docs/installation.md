@@ -25,21 +25,24 @@ The second prints the component inventory — one skill, no hooks, no MCP server
 
 `.claude-plugin/marketplace.json` at the repository root declares the Claude package by relative path, and only that one — see below for why the Codex package is excluded. With it present, the standard sequence is:
 
+Start Claude Code, then run these inside the session:
+
 | Step | Command | What it changes | How to reverse |
 |---|---|---|---|
-| 1 | `claude plugin marketplace add /path/to/ThyQuery` | Registers this repository as a marketplace in your Claude Code configuration | `claude plugin marketplace remove thyquery` |
-| 2 | `claude plugin install thyquery@thyquery` | Installs the Claude package into `~/.claude/plugins` and makes `/thyquery:thyquery` available in every session | `claude plugin uninstall thyquery` |
-| 3 | `claude plugin disable thyquery` | Keeps it installed but inactive | `claude plugin enable thyquery` |
+| 1 | `/plugin marketplace add umyunsang/ThyQuery` | Registers this repository as a marketplace in your Claude Code configuration | Remove the marketplace from the `/plugin` manager |
+| 2 | `/plugin install thyquery@thyquery` | Installs the Claude package into `~/.claude/plugins` and makes `/thyquery:thyquery` available in every session | Uninstall it from the `/plugin` manager |
 
 Step 2 is the one that changes behaviour globally. Until then the plugin only exists in sessions you explicitly point at it.
 
-## The Codex package is in this repository and is not released
+`/plugin` with no arguments opens the manager, where installed plugins can be disabled without removing them, re-enabled, or uninstalled. A local checkout works in place of the repository slug in step 1 if you would rather install from a path you can read first.
+
+## The Codex package is in this repository and is not published yet
 
 `plugins/codex-thyquery` ships in the source tree but is **deliberately absent from `.claude-plugin/marketplace.json`**, so it cannot be installed through the marketplace.
 
 That is not an oversight. The Codex package has never been loaded into Codex, never run, and never conformance-tested: it is `CONFORMANCE_UNTESTED` with `ISOLATION_METHOD_UNRESOLVED`, because the inspected Codex CLI exposes no session-only local loader and no safe method for loading a local candidate without touching real marketplace, configuration, or cache state has been demonstrated. Listing it would offer an install path for something whose behaviour is entirely unverified.
 
-It remains in the tree because the two packages share one specification and are generated together, and because a future Codex release may supply the loader that is missing today. Treat it as source, not as a product.
+It remains in the tree because the two packages share one specification and are generated together, and publishing it is planned. What that waits on is a loader: a Codex release exposing a session-only path for a local candidate, so the package can be run and conformance-tested before anyone is offered an install. Until that exists, treat it as source rather than as a product.
 
 See [support-matrix.md](support-matrix.md) for the per-surface evidence.
 
