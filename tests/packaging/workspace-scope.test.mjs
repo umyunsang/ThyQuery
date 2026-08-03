@@ -37,7 +37,10 @@ test("workspace top-level paths stay inside the approved allowlist", async () =>
   // Host-owned paths are created by the surrounding tooling, not by this
   // project, so they are tolerated but never required: a checkout without them
   // must still pass, and this guard must fail on product footprint only.
-  const hostOwned = [".claude", ".remember"];
+  // `.git` belongs here for the same reason — it is version-control metadata,
+  // not product surface, and a released checkout carries it while an extracted
+  // archive does not.
+  const hostOwned = [".claude", ".git", ".remember"];
 
   assert.deepEqual(
     names.filter((name) => !hostOwned.includes(name)),
@@ -46,7 +49,6 @@ test("workspace top-level paths stay inside the approved allowlist", async () =>
   for (const name of names) {
     assert.ok(required.includes(name) || hostOwned.includes(name), name);
   }
-  assert.ok(!names.includes(".git"));
   assert.ok(!names.includes("node_modules"));
   assert.ok(!names.includes("package-lock.json"));
 });
