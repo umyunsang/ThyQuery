@@ -23,7 +23,7 @@ The second prints the component inventory — one skill, no hooks, no MCP server
 
 ## Persistent installation — recorded, not performed
 
-`.claude-plugin/marketplace.json` at the repository root declares both packages by relative path. With it present, the standard sequence is:
+`.claude-plugin/marketplace.json` at the repository root declares the Claude package by relative path, and only that one — see below for why the Codex package is excluded. With it present, the standard sequence is:
 
 | Step | Command | What it changes | How to reverse |
 |---|---|---|---|
