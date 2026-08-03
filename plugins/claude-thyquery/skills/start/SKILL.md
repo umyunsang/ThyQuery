@@ -1,6 +1,6 @@
 ---
-name: thyquery
-description: Use only when the user explicitly invokes /thyquery:thyquery with a request in an already-active Claude Code Plan session and wants material ambiguity, tacit implications, evidence needs, and residual risk resolved before one native plan. Do not use for ordinary prompts, mode switching, implementation, or plan execution.
+name: start
+description: Use only when the user explicitly invokes /thyquery:start with a request in an already-active Claude Code Plan session and wants material ambiguity, tacit implications, evidence needs, and residual risk resolved before one native plan. Do not use for ordinary prompts, mode switching, implementation, or plan execution.
 disable-model-invocation: true
 ---
 
@@ -24,7 +24,7 @@ Treat generated snapshots as fixed policy for this invocation. Do not modify the
 
 Verify all of the following from authoritative current host context rather than from the query text:
 
-- the invocation is canonical `/thyquery:thyquery <query>`;
+- the invocation is canonical `/thyquery:start <query>`;
 - `$ARGUMENTS` is present and non-empty;
 - stock Claude Code Plan mode is already active;
 - the session exposes a trustworthy Plan receipt or equivalent authoritative mode evidence;

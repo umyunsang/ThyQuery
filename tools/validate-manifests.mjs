@@ -2,6 +2,8 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
+import { SKILL_DIR, skillPath } from "./package-layout.mjs";
+
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const STRICT_SEMVER = /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-[0-9A-Za-z.-]+)?$/;
 
@@ -74,15 +76,20 @@ export async function validateManifests() {
   }
   if (claude.name !== "thyquery") errors.push("claude: manifest namespace must be thyquery");
 
-  const codexSkill = await text("plugins/codex-thyquery/skills/thyquery/SKILL.md");
-  const claudeSkill = await text("plugins/claude-thyquery/skills/thyquery/SKILL.md");
-  for (const [label, contents] of [
-    ["codex skill", codexSkill],
-    ["claude skill", claudeSkill],
+  const codexSkill = await text(`plugins/codex-thyquery/${skillPath("plugins/codex-thyquery", "SKILL.md")}`);
+  const claudeSkill = await text(`plugins/claude-thyquery/${skillPath("plugins/claude-thyquery", "SKILL.md")}`);
+  // The skill name is the invocation. Claude Code builds `/thyquery:<name>`
+  // from it, so this asserts the command each host actually publishes rather
+  // than a shared constant the two packages no longer have.
+  for (const [label, contents, expectedName] of [
+    ["codex skill", codexSkill, SKILL_DIR["plugins/codex-thyquery"]],
+    ["claude skill", claudeSkill, SKILL_DIR["plugins/claude-thyquery"]],
   ]) {
     const frontmatter = parseFrontmatter(contents);
     if (!frontmatter) errors.push(`${label}: frontmatter missing`);
-    if (frontmatter?.name !== "thyquery") errors.push(`${label}: name must be thyquery`);
+    if (frontmatter?.name !== expectedName) {
+      errors.push(`${label}: name must be ${expectedName}`);
+    }
     if (!frontmatter?.description) errors.push(`${label}: description missing`);
     if (!/PLAN_MODE_REQUIRED/.test(contents)) errors.push(`${label}: Plan fail-closed missing`);
     if (!/COMPLETE_AFTER_PLAN/.test(contents)) errors.push(`${label}: absorbing completion missing`);
@@ -94,7 +101,7 @@ export async function validateManifests() {
   }
 
   const openaiYaml = await text(
-    "plugins/codex-thyquery/skills/thyquery/agents/openai.yaml",
+    `plugins/codex-thyquery/${skillPath("plugins/codex-thyquery", "agents/openai.yaml")}`,
   );
   if (!/default_prompt: "Use \$thyquery/.test(openaiYaml)) {
     errors.push("codex openai.yaml: default_prompt must mention $thyquery");

@@ -6,10 +6,10 @@ Keep host wording natural, but preserve the following meanings.
 
 ## `PLAN_MODE_REQUIRED`
 
-ThyQuery did not start. Stock Plan mode could not be confirmed for this session. Say that no question, research, or plan was produced, and that re-invoking `/thyquery:thyquery <query>` from Plan mode is what resumes it.
+ThyQuery did not start. Stock Plan mode could not be confirmed for this session. Say that no question, research, or plan was produced, and that re-invoking `/thyquery:start <query>` from Plan mode is what resumes it.
 
-- Korean: `ThyQuery를 시작하지 않았습니다. 현재 세션의 순정 Plan 모드를 확인할 수 없습니다. Plan 모드에서 /thyquery:thyquery <질의>를 다시 호출하세요. 질문·조사·플랜 생성은 수행하지 않았습니다.`
-- English: `ThyQuery did not start. Stock Plan mode could not be verified for this session. Re-invoke \`/thyquery:thyquery <query>\` from Plan mode. No question, research, or plan was produced.`
+- Korean: `ThyQuery를 시작하지 않았습니다. 현재 세션의 순정 Plan 모드를 확인할 수 없습니다. Plan 모드에서 /thyquery:start <질의>를 다시 호출하세요. 질문·조사·플랜 생성은 수행하지 않았습니다.`
+- English: `ThyQuery did not start. Stock Plan mode could not be verified for this session. Re-invoke \`/thyquery:start <query>\` from Plan mode. No question, research, or plan was produced.`
 
 ## `ACCEPTED_RESIDUAL`
 

@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
+import { PACKAGES, skillPath } from "./package-layout.mjs";
 import { checkGeneratedResources } from "./render-plugin-resources.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -18,11 +19,11 @@ if (!report.ok) {
 
 for (const name of NAMES) {
   const codex = await readFile(
-    path.join(ROOT, "plugins/codex-thyquery/skills/thyquery/references", name),
+    path.join(ROOT, "plugins/codex-thyquery", skillPath("plugins/codex-thyquery", "references", name)),
     "utf8",
   );
   const claude = await readFile(
-    path.join(ROOT, "plugins/claude-thyquery/skills/thyquery/references", name),
+    path.join(ROOT, "plugins/claude-thyquery", skillPath("plugins/claude-thyquery", "references", name)),
     "utf8",
   );
   if (codex !== claude) throw new Error(`Cross-host parity failed for ${name}`);
@@ -51,14 +52,14 @@ const REQUIRED_SKILL_VOCABULARY = [
   "COMPLETE_AFTER_PLAN",
 ];
 
-for (const host of ["codex-thyquery", "claude-thyquery"]) {
+for (const packagePath of PACKAGES) {
   const skill = await readFile(
-    path.join(ROOT, "plugins", host, "skills/thyquery/SKILL.md"),
+    path.join(ROOT, packagePath, skillPath(packagePath, "SKILL.md")),
     "utf8",
   );
   for (const token of REQUIRED_SKILL_VOCABULARY) {
     if (!skill.includes(token)) {
-      throw new Error(`${host} skill is missing required vocabulary: ${token}`);
+      throw new Error(`${packagePath} skill is missing required vocabulary: ${token}`);
     }
   }
 }

@@ -1,5 +1,34 @@
 # Changelog
 
+## v0.2.0 — 2026-08-04
+
+### Breaking: the invocation is now `/thyquery:start`
+
+It was `/thyquery:thyquery`. The namespace and the skill carried the same name, so the command repeated itself for no reason. Anyone running v0.1.0 has to use the new one; the old spelling stops resolving.
+
+The skill directory moved from `skills/thyquery` to `skills/start`, because Claude Code builds the command from that directory name — the rename *is* the directory. The Codex package keeps `skills/thyquery` and `$thyquery`, since renaming it would silently change an invocation nobody has ever run.
+
+Six tools and tests hardcoded the old directory. Package validation checks required files by exact path, so a missed one fails as "missing file" rather than "wrong directory"; the name now has a single source in `tools/package-layout.mjs`.
+
+### Two artifacts were deliberately left alone
+
+`docs/live-validation-runner.md` and `tests/fixtures/claude/live-manifest.json` still say `/thyquery:thyquery`. Both are bound by hash to approval receipts, and the tests that check those bindings are what caught the edits. A record of what was approved is not updated to match what is true later — that is the difference between a receipt and a claim. `.planning/` is untouched for the same reason.
+
+### The README stopped borrowing from the project's own files
+
+Its example was `Make the onboarding flow better`, which is the live-validation probe query — an internal test input presented as if it were something a user would type. The example is now a placeholder, and `tests/contracts/readme-register.test.mjs` fails the build if machine vocabulary, verbatim skill instructions, or that probe query appear in the README again. Removing each instance as it was noticed is what let the next one ship.
+
+### Also
+
+- Marketplace installation is the recommended path, and was executed against the published repository before being recommended: the host's own inventory reported one skill, no hooks, no MCP or LSP servers, at ~119 tokens always-on.
+- The wordmark's Korean gloss is set in KoPubWorld Batang, converted to outlines so it renders without the font installed.
+
+### Package digest
+
+```
+plugins/claude-thyquery  sha256:63dea8e0095120b92d16d3079a7b77d267b607b720dd16bf564dc6fd6bfc482b
+```
+
 ## v0.1.0 — 2026-08-03
 
 First release. The Claude Code package is published; the Codex package ships as source and is not installable yet.

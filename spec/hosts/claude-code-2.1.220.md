@@ -2,7 +2,7 @@
 
 ## Product surface
 
-- Canonical invocation: `/thyquery:thyquery <query>`; the plugin manifest namespace is `thyquery` and the skill name is `thyquery`.
+- Canonical invocation: `/thyquery:start <query>`; the plugin manifest namespace is `thyquery` and the skill name is `start`.
 - Entry requirement: verified stock Plan before any refinement action. The skill does not call `EnterPlanMode` and does not compose with `/plan`.
 - Native question surface: `AskUserQuestion`, with adaptive choices plus correction/defer/cancel paths. The tool's existence and interactive behavior are established by direct use, not assumed; what remains untested is its availability under `--print` and whether this skill drives it correctly.
 - Native Plan presentation and observation must use documented stock Plan behavior; no plugin-authored substitute plan is accepted.

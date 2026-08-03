@@ -3,31 +3,33 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 import { digest } from "../src/reference/canonicalize.mjs";
+import { PACKAGES, skillPath } from "./package-layout.mjs";
 import { checkGeneratedResources } from "./render-plugin-resources.mjs";
 import { validateManifests } from "./validate-manifests.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const PACKAGES = ["plugins/codex-thyquery", "plugins/claude-thyquery"];
 const ALLOWED_EXTENSIONS = new Set([".json", ".md", ".yaml"]);
+const CODEX = "plugins/codex-thyquery";
+const CLAUDE = "plugins/claude-thyquery";
 const REQUIRED = {
-  "plugins/codex-thyquery": [
+  [CODEX]: [
     ".codex-plugin/plugin.json",
-    "skills/thyquery/SKILL.md",
-    "skills/thyquery/agents/openai.yaml",
-    "skills/thyquery/references/protocol.generated.md",
-    "skills/thyquery/references/graph.generated.md",
-    "skills/thyquery/references/closure.generated.md",
-    "skills/thyquery/references/codex-adapter.md",
-    "skills/thyquery/references/copy.md",
+    skillPath(CODEX, "SKILL.md"),
+    skillPath(CODEX, "agents/openai.yaml"),
+    skillPath(CODEX, "references/protocol.generated.md"),
+    skillPath(CODEX, "references/graph.generated.md"),
+    skillPath(CODEX, "references/closure.generated.md"),
+    skillPath(CODEX, "references/codex-adapter.md"),
+    skillPath(CODEX, "references/copy.md"),
   ],
-  "plugins/claude-thyquery": [
+  [CLAUDE]: [
     ".claude-plugin/plugin.json",
-    "skills/thyquery/SKILL.md",
-    "skills/thyquery/references/protocol.generated.md",
-    "skills/thyquery/references/graph.generated.md",
-    "skills/thyquery/references/closure.generated.md",
-    "skills/thyquery/references/claude-adapter.md",
-    "skills/thyquery/references/copy.md",
+    skillPath(CLAUDE, "SKILL.md"),
+    skillPath(CLAUDE, "references/protocol.generated.md"),
+    skillPath(CLAUDE, "references/graph.generated.md"),
+    skillPath(CLAUDE, "references/closure.generated.md"),
+    skillPath(CLAUDE, "references/claude-adapter.md"),
+    skillPath(CLAUDE, "references/copy.md"),
   ],
 };
 

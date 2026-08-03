@@ -129,7 +129,7 @@ test("host, handoff, and terminal samples satisfy their contracts", async () => 
     host: "claude-code",
     version: "2.1.220",
     surface: "plugin-skill",
-    canonical_invocation: "/thyquery:thyquery <query>",
+    canonical_invocation: "/thyquery:start <query>",
     plan_evidence: "REQUIRED",
     native_question: "AskUserQuestion",
     native_plan_observation: "stock Plan surface",

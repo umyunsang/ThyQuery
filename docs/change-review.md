@@ -28,7 +28,7 @@ The reviewer reported zero writes, zero descendants, and no network, model, plug
 - `claude plugin validate --strict plugins/claude-thyquery`: PASS for package grammar only; the plugin was not loaded.
 - Fallback local Codex plugin and skill validators: PASS as static-only evidence.
 - Codex package: `sha256:465f16316a2ad5083c91f4267e93446b3d7495eff72d01614c8802ef850ab7f1`.
-- Claude package: `sha256:b1883658b15f17fc8548bc105593f3ce5edaa8897002dffdf45995c747d76125`.
+- Claude package: `sha256:63dea8e0095120b92d16d3079a7b77d267b607b720dd16bf564dc6fd6bfc482b`.
 - `LVP_v3.md`: `sha256:fe17b11ac61012423aadb72aca274bd4ff1dabf4f23e26d9f1eb96a64533f39a`.
 
 ## Remaining boundary

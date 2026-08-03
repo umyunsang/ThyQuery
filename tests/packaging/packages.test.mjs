@@ -14,7 +14,7 @@ test("host manifests and explicit skill entrypoints are valid", async () => {
 
 test("Claude skill is user-invocable only and cannot be selected implicitly", async () => {
   const skill = await readFile(
-    new URL("../../plugins/claude-thyquery/skills/thyquery/SKILL.md", import.meta.url),
+    new URL("../../plugins/claude-thyquery/skills/start/SKILL.md", import.meta.url),
     "utf8",
   );
   const frontmatter = skill.match(/^---\n([\s\S]*?)\n---\n/)?.[1] ?? "";

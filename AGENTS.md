@@ -2,7 +2,7 @@
 
 ## Product boundary
 
-- ThyQuery is an explicit, Plan-first pre-planning layer. Codex uses `$thyquery <query>` and Claude Code uses `/thyquery:thyquery <query>`.
+- ThyQuery is an explicit, Plan-first pre-planning layer. Codex uses `$thyquery <query>` and Claude Code uses `/thyquery:start <query>`.
 - Never add automatic prompt routing, automatic mode switching, execution hooks, or post-plan continuation.
 - Outside verified stock Plan mode, return `PLAN_MODE_REQUIRED` and perform no question, research, handoff, or plan generation.
 - Only `EPISTEMIC_CLOSED` and `ACCEPTED_RESIDUAL` may authorize one native-plan handoff intent. Stop after one observed native plan.

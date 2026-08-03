@@ -4,7 +4,7 @@ Status date: 2026-08-03. Neither plugin is installed or enabled. The Claude pack
 
 | Surface | Codex 0.146.0 | Claude Code 2.1.220 |
 |---|---|---|
-| Canonical invocation | `$thyquery <query>` | `/thyquery:thyquery <query>` |
+| Canonical invocation | `$thyquery <query>` | `/thyquery:start <query>` |
 | Package manifest | Static PASS | Native strict PASS |
 | Skill frontmatter | Fallback Codex validator PASS | Native Claude strict PASS; implicit model invocation disabled |
 | Generated semantic parity | PASS | PASS |

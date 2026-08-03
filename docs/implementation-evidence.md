@@ -14,7 +14,7 @@ No installation, plugin enablement, marketplace mutation, real host configuratio
 
 ## Delivered behavior
 
-1. Explicit Plan-first entry: Codex `$thyquery`; Claude `/thyquery:thyquery`.
+1. Explicit Plan-first entry: Codex `$thyquery`; Claude `/thyquery:start`.
 2. Missing/unprovable stock Plan returns `PLAN_MODE_REQUIRED` before question, research, or plan.
 3. One canonical event-derived invocation state with predecessor/hash/idempotency checks.
 4. Frozen P0–P8 guard order and deterministic gap/action routing.
@@ -36,7 +36,7 @@ No installation, plugin enablement, marketplace mutation, real host configuratio
 
 - Volatile file/line counts are intentionally omitted; exact package and proposal fingerprints below are the acceptance receipts.
 - Codex package digest: `sha256:465f16316a2ad5083c91f4267e93446b3d7495eff72d01614c8802ef850ab7f1`.
-- Claude package digest: `sha256:b1883658b15f17fc8548bc105593f3ce5edaa8897002dffdf45995c747d76125`.
+- Claude package digest: `sha256:63dea8e0095120b92d16d3079a7b77d267b607b720dd16bf564dc6fd6bfc482b`.
 - Codex live-manifest SHA-256: `02631cbc643301c598fc5493eb7e6bd318fbad72ec098caf17186b75e05ba239`.
 - Claude live-manifest SHA-256: `ee98db2c76a976dd52bc57426f5f784f7b9c4c19a65b91296b7799f3053cd5e2`.
 - Evaluation-arms SHA-256: `9e37a4206024c1cf3238c8f5faed1f19e638e9f7003af60340ff3ba2a4507647`.

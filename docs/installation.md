@@ -9,7 +9,7 @@ Start Claude Code, then run these inside the session:
 /plugin install thyquery@thyquery
 ```
 
-`/thyquery:thyquery` is then available in every session, and `/plugin` with no arguments opens the manager for disabling or removing it later.
+`/thyquery:start` is then available in every session, and `/plugin` with no arguments opens the manager for disabling or removing it later.
 
 **This path has been executed against the published repository.** The marketplace resolved and cloned over HTTPS, the install succeeded, and the host's own component inventory reported what the package contains:
 
@@ -52,7 +52,7 @@ claude --plugin-dir plugins/claude-thyquery plugin details thyquery
 | Step | Command | What it changes | How to reverse |
 |---|---|---|---|
 | 1 | `/plugin marketplace add umyunsang/ThyQuery` | Registers this repository as a marketplace in your Claude Code configuration | Remove the marketplace from the `/plugin` manager |
-| 2 | `/plugin install thyquery@thyquery` | Installs the Claude package into `~/.claude/plugins` and makes `/thyquery:thyquery` available in every session | Uninstall it from the `/plugin` manager |
+| 2 | `/plugin install thyquery@thyquery` | Installs the Claude package into `~/.claude/plugins` and makes `/thyquery:start` available in every session | Uninstall it from the `/plugin` manager |
 
 Step 2 is the one that changes behaviour globally. Until then the plugin only exists in sessions you explicitly point at it.
 

@@ -13,9 +13,9 @@ In Plato's *Meno*, a young man opens by asking Socrates a direct question: can v
 
 Socrates does not answer it. He asks a question back — what *is* virtue? — and then another, and another, because you cannot say whether a thing can be taught until you know what the thing is.
 
-Your coding agent has the opposite reflex. Told to *make the onboarding flow better*, it never asks what **better** means here. It picks one meaning, silently, and builds.
+Your coding agent has the opposite reflex. Tell it to *clean this up* and it never asks what **clean** means to you. It picks one meaning, silently, and builds.
 
-**ThyQuery gives it Socrates' reflex instead.** It asks — then asks again, each question shaped by your last answer — until *better* has an actual definition and the request is concrete enough to build from. Only then does it hand the result to your agent's own planner, and stop.
+**ThyQuery gives it Socrates' reflex instead.** It asks — then asks again, each question shaped by your last answer — until the vague word has an actual definition and the request is concrete enough to build from. Only then does it hand the result to your agent's own planner, and stop.
 
 ## Why it's different
 
@@ -47,19 +47,19 @@ claude --plugin-dir ThyQuery/plugins/claude-thyquery
 Enter Plan mode, then:
 
 ```
-/thyquery:thyquery Make the onboarding flow better
+/thyquery:start <your request, however vague>
 ```
 
 ## Hosts
 
 | Host | Invocation | Status |
 |---|---|---|
-| **Claude Code** | `/thyquery:thyquery` | **Published** |
+| **Claude Code** | `/thyquery:start` | **Published** |
 | **Codex** | `$thyquery` | Source in the tree, publication planned |
 
 ## Status
 
-**v0.1.0 — pre-release.** Seven of nine conformance cases pass, on one model. Efficacy is unevaluated: the plugin does what it says, but whether the plans come out better has not been measured.
+**v0.1.0 — pre-release.** Seven of nine conformance cases pass, on one model. What nobody has measured yet is the part you would care about most: whether the plans you end up with are better than the ones you would have got anyway.
 
 ## Docs
 

@@ -9,7 +9,7 @@ Enter Plan mode using your host's normal mechanism, then invoke. If Plan mode is
 ## What a first invocation looks like
 
 ```
-/thyquery:thyquery Make the onboarding flow better
+/thyquery:start Make the onboarding flow better
 ```
 
 The flow that follows is a loop, and each pass does one thing:

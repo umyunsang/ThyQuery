@@ -51,8 +51,11 @@ test("onboarding and the closure policy agree that v1 cannot reach resolved clos
 });
 
 test("both outcome-copy files unpin output language instead of fixing one", async () => {
-  for (const host of ["claude-thyquery", "codex-thyquery"]) {
-    const copy = await read(`../../plugins/${host}/skills/thyquery/references/copy.md`);
+  for (const [host, skillDir] of [
+    ["claude-thyquery", "start"],
+    ["codex-thyquery", "thyquery"],
+  ]) {
+    const copy = await read(`../../plugins/${host}/skills/${skillDir}/references/copy.md`);
     assert.match(
       copy,
       /output language follows the user's query language/iu,

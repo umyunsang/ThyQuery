@@ -3,12 +3,12 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 
 import { digest } from "../src/reference/canonicalize.mjs";
+import { PACKAGES, skillPath } from "./package-layout.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const PACKAGE_ROOTS = [
-  path.join(ROOT, "plugins/codex-thyquery/skills/thyquery/references"),
-  path.join(ROOT, "plugins/claude-thyquery/skills/thyquery/references"),
-];
+const PACKAGE_ROOTS = PACKAGES.map((packagePath) =>
+  path.join(ROOT, packagePath, skillPath(packagePath, "references")),
+);
 
 async function readSource(relativePath) {
   return readFile(path.join(ROOT, relativePath), "utf8");
