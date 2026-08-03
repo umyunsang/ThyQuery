@@ -1,31 +1,53 @@
 # Installation
 
-**None of the commands below have been run.** They are recorded so the path exists and is reviewable; executing them is separately gated by [installation-pending.md](installation-pending.md), which freezes package hashes, host state, cost ceiling, recovery procedure, and receipts before any of this is carried out.
+## Recommended: install from the marketplace
 
-## What actually works today
+Start Claude Code, then run these inside the session:
 
-Every live run in this project loaded the plugin session-only:
+```
+/plugin marketplace add umyunsang/ThyQuery
+/plugin install thyquery@thyquery
+```
+
+`/thyquery:thyquery` is then available in every session, and `/plugin` with no arguments opens the manager for disabling or removing it later.
+
+**This path has been executed against the published repository.** The marketplace resolved and cloned over HTTPS, the install succeeded, and the host's own component inventory reported what the package contains:
+
+```
+Component inventory
+  Skills (1)  thyquery
+  Agents (0)
+  Hooks (0)
+  MCP servers (0)
+  LSP servers (0)
+
+Projected token cost
+  Always-on:   ~119 tok   added to every session
+  On-invoke:   ~3.3k tok
+```
+
+That inventory is the host describing the package, not the package describing itself, so it is the independent confirmation of the runtime boundary. The verification ran at project scope and was removed afterwards; what it proves is that the sequence works, not that any particular machine still has it installed.
+
+## Alternative: load it for one session
+
+To read the source before installing anything, or to try it without changing your configuration:
 
 ```sh
 claude --plugin-dir /path/to/ThyQuery/plugins/claude-thyquery
 ```
 
-Nothing is installed, nothing is enabled, and `claude plugin list` stays empty afterwards. The load lasts exactly one session. This is the path that has been exercised, and it is the one to use if you only want to try ThyQuery.
+Nothing is installed, nothing is enabled, and `claude plugin list` stays empty afterwards. The load lasts exactly one session. Every conformance run in this project used this path.
 
-Verify a package without loading it at all:
+Check a package without loading it at all:
 
 ```sh
 claude plugin validate --strict plugins/claude-thyquery
 claude --plugin-dir plugins/claude-thyquery plugin details thyquery
 ```
 
-The second prints the component inventory — one skill, no hooks, no MCP servers, no LSP servers — which is how the runtime boundary was independently confirmed.
+## What each step changes
 
-## Persistent installation — recorded, not performed
-
-`.claude-plugin/marketplace.json` at the repository root declares the Claude package by relative path, and only that one — see below for why the Codex package is excluded. With it present, the standard sequence is:
-
-Start Claude Code, then run these inside the session:
+`.claude-plugin/marketplace.json` at the repository root declares the Claude package, and only that one — see below for why the Codex package is excluded.
 
 | Step | Command | What it changes | How to reverse |
 |---|---|---|---|
@@ -34,7 +56,9 @@ Start Claude Code, then run these inside the session:
 
 Step 2 is the one that changes behaviour globally. Until then the plugin only exists in sessions you explicitly point at it.
 
-`/plugin` with no arguments opens the manager, where installed plugins can be disabled without removing them, re-enabled, or uninstalled. A local checkout works in place of the repository slug in step 1 if you would rather install from a path you can read first.
+Both steps accept `--scope project` to confine the change to the current repository instead of your user configuration, and a local checkout works in place of the repository slug in step 1 if you would rather install from a path you can read first.
+
+Installing does not make the plugin act on its own. The skill sets `disable-model-invocation: true`, so it runs only when you invoke it, and it refuses unless stock Plan mode is already active. See [getting-started.md](getting-started.md).
 
 ## The Codex package is in this repository and is not published yet
 

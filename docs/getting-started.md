@@ -52,4 +52,4 @@ One stock native plan is produced, then `COMPLETE_AFTER_PLAN`, and ThyQuery is d
 
 ## Installing
 
-Session-only loading via `--plugin-dir` is what has actually been exercised. See [installation.md](installation.md); persistent installation is separately gated by [installation-pending.md](installation-pending.md).
+Install from the marketplace with `/plugin marketplace add umyunsang/ThyQuery` and `/plugin install thyquery@thyquery`, or load it for a single session with `--plugin-dir`. See [installation.md](installation.md) for what each path changes and how to reverse it.

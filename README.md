@@ -25,18 +25,20 @@ Your coding agent has the opposite reflex. Told to *make the onboarding flow bet
 
 ## Install
 
-Try it for one session:
-
-```sh
-git clone https://github.com/umyunsang/ThyQuery.git
-claude --plugin-dir ThyQuery/plugins/claude-thyquery
-```
-
-Keep it — inside a Claude Code session:
+**Recommended** — inside a Claude Code session:
 
 ```
 /plugin marketplace add umyunsang/ThyQuery
 /plugin install thyquery@thyquery
+```
+
+It ships one skill and nothing else — no hooks, no MCP servers, no background process — and costs about 120 tokens per session while idle. `/plugin` will confirm both for you.
+
+Prefer to read the source before installing anything? Load it for a single session instead:
+
+```sh
+git clone https://github.com/umyunsang/ThyQuery.git
+claude --plugin-dir ThyQuery/plugins/claude-thyquery
 ```
 
 ## Use
