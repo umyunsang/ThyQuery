@@ -3,33 +3,50 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
 // The CAL_OK correction reached the closure policy, the generator template, and
-// both skills, but not the README — and nothing checked, so a reader was left
-// expecting an outcome the release cannot produce. These assertions bind the
-// two documents so the next such correction cannot drift out of one of them.
+// both skills, but not the onboarding document — and nothing checked, so a
+// reader was left expecting an outcome the release cannot produce. These
+// assertions bind the two documents so the next such correction cannot drift
+// out of one of them.
+//
+// The binding follows the promise rather than the file. It sat on the README
+// while the README explained outcomes; the README now sends readers to
+// getting-started.md for that, so the guard moved with the explanation. A
+// reader can only be misled by the document that names the outcomes, and this
+// asserts against whichever one that is.
 
 async function read(relative) {
   return readFile(new URL(relative, import.meta.url), "utf8");
 }
 
-test("the README and the closure policy agree that v1 cannot reach resolved closure", async () => {
+test("onboarding and the closure policy agree that v1 cannot reach resolved closure", async () => {
   const policy = await read("../../spec/policies/closure-policy.v1.md");
+  const onboarding = await read("../../docs/getting-started.md");
   const readme = await read("../../README.md");
 
-  // Guard the premise: if the policy ever stops saying this, the README
+  // Guard the premise: if the policy ever stops saying this, the onboarding
   // assertions below become wrong rather than merely unnecessary.
   assert.match(policy, /No such calibration exists in v1/u);
   assert.match(policy, /`CAL_OK` is false for every stratum in v1/u);
 
-  assert.match(readme, /no calibration/iu, "README must state that no calibration ships");
+  assert.match(onboarding, /no calibration/iu, "onboarding must state that no calibration ships");
   assert.match(
-    readme,
+    onboarding,
     /`EPISTEMIC_CLOSED` is unreachable/u,
-    "README must state that resolved closure is unreachable in v1",
+    "onboarding must state that resolved closure is unreachable in v1",
   );
   assert.match(
-    readme,
+    onboarding,
     /`ACCEPTED_RESIDUAL`[^\n]*only reachable success outcome/u,
-    "README must name the residual path as the only reachable success",
+    "onboarding must name the residual path as the only reachable success",
+  );
+
+  // The README may stay silent about outcomes, but it must not send readers
+  // somewhere else for them: the promise and its correction have to stay one
+  // click apart.
+  assert.match(
+    readme,
+    /\]\(docs\/getting-started\.md\)/u,
+    "README must link the document that carries the outcome statements",
   );
 });
 

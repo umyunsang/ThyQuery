@@ -24,9 +24,9 @@ Then one of two things ends it: an enumerated residual ledger you explicitly acc
 
 ## What success actually looks like
 
-**`ACCEPTED_RESIDUAL` is the success outcome in v1.** Not a consolation prize.
+**`ACCEPTED_RESIDUAL` is the only reachable success outcome in v1.** Not a consolation prize.
 
-Full resolution — `EPISTEMIC_CLOSED` — requires a calibration that this release does not ship, so it is unreachable by construction rather than by judgment. What you get instead is a contract whose open questions are enumerated with impact, mitigation, reversibility, and owner, which you accepted knowingly. That is the honest shape of "we resolved enough to plan", and it is the only shape v1 can produce.
+Full resolution requires a calibration this release does not ship — no calibration exists for any task, risk, or language stratum — so `EPISTEMIC_CLOSED` is unreachable by construction rather than by judgment. What you get instead is a contract whose open questions are enumerated with impact, mitigation, reversibility, and owner, which you accepted knowingly. That is the honest shape of "we resolved enough to plan", and it is the only shape v1 can produce.
 
 ## The transition budget
 
