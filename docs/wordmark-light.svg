@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="20 30 545 168" width="545" height="168" role="img" aria-labelledby="t d">
+  <title id="t">ThyQuery</title>
+  <desc id="d">ThyQuery wordmark. THY set in bold uppercase serif, query in lightly tracked lowercase, glossed in Korean as 그대의 질의 — thy query.</desc>
+  <g fill="#14110E" font-family="ui-serif, 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, 'Times New Roman', serif">
+    <text x="40" y="104" font-size="72" font-weight="700" letter-spacing="4.3">THY</text>
+    <text x="252" y="104" font-size="72" font-weight="400" letter-spacing="24.5" fill-opacity="0.62">query</text>
+  </g>
+  <rect x="41" y="138" width="504" height="1" fill="#14110E" fill-opacity="0.2"/>
+  <text x="40" y="180" font-size="30" letter-spacing="6.2" fill="#14110E" fill-opacity="0.45"
+        font-family="'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Nanum Gothic', 'AppleGothic', sans-serif">그대의 질의</text>
+</svg>
