@@ -11,17 +11,18 @@
 
 In Plato's *Meno*, a young man opens by asking Socrates a direct question: can virtue be taught?
 
-Socrates does not answer it. He asks a question back — what *is* virtue? You cannot say whether a thing can be taught, he argues, until you know what the thing is.
+Socrates does not answer it. He asks a question back — what *is* virtue? — and then another, and another, because you cannot say whether a thing can be taught until you know what the thing is.
 
 Your coding agent has the opposite reflex. Told to *make the onboarding flow better*, it never asks what **better** means here. It picks one meaning, silently, and builds.
 
-**ThyQuery makes it ask first** — one question, about the one thing that would change the plan. Your answer goes to the agent's own planner. Then it stops.
+**ThyQuery gives it Socrates' reflex instead.** It asks — then asks again, each question shaped by your last answer — until *better* has an actual definition and the request is concrete enough to build from. Only then does it hand the result to your agent's own planner, and stop.
 
 ## Why it's different
 
-- Asks **one** question, and only when the answer changes the plan.
-- Never guesses your preferences. It asks you.
-- Hands over one plan, then stops. It never executes.
+- **It keeps asking until the vagueness is gone.** Not a form to fill in: one question at a time, and only about the things that would genuinely change what gets built.
+- **It asks instead of assuming.** Your priorities and preferences are yours to state. It will not infer them from your codebase or from the web.
+- **It adds nothing to your setup.** No runtime, no wrapper, nothing running in the background — it drives the tools your agent already has, through the same question and plan surfaces you already use. Nothing about the way you work changes.
+- **It stops at the plan.** One handoff to your agent's own planner, then it ends. It never executes.
 
 ## Install
 
@@ -32,7 +33,7 @@ Your coding agent has the opposite reflex. Told to *make the onboarding flow bet
 /plugin install thyquery@thyquery
 ```
 
-It ships one skill and nothing else — no hooks, no MCP servers, no background process — and costs about 120 tokens per session while idle. `/plugin` will confirm both for you.
+One skill, about 120 tokens per session while idle. `/plugin` reports the inventory itself, so you do not have to take that on trust.
 
 Prefer to read the source before installing anything? Load it for a single session instead:
 
