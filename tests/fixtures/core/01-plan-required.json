@@ -1,0 +1,16 @@
+{
+  "name": "outside verified Plan",
+  "initial": {
+    "invocation_id": "fx-plan-required",
+    "original_query": "Build a feature",
+    "host": "codex",
+    "transition_budget": 3
+  },
+  "events": [],
+  "expected": {
+    "next": "PLAN_MODE_REQUIRED",
+    "terminal_state": "PLAN_MODE_REQUIRED",
+    "transition_remaining": 3,
+    "native_plan_count": 0
+  }
+}

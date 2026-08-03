@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thyquery.local/spec/schemas/handoff.schema.json",
+  "title": "ThyQuery native-plan handoff v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "handoff_key",
+    "invocation_id",
+    "contract_digest",
+    "authorization_kind",
+    "outcome",
+    "receipt"
+  ],
+  "properties": {
+    "schema_version": { "const": "thyquery.handoff.v1" },
+    "handoff_key": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "invocation_id": { "type": "string", "minLength": 1 },
+    "contract_digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "authorization_kind": { "enum": ["EPISTEMIC_CLOSED", "ACCEPTED_RESIDUAL"] },
+    "outcome": { "enum": ["INTENT_ONLY", "APPLIED", "NOT_APPLIED", "UNKNOWN"] },
+    "receipt": { "type": ["string", "null"] }
+  }
+}

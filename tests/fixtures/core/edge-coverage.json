@@ -1,0 +1,31 @@
+{
+  "schema_version": "thyquery.edge-fixture-matrix.v1",
+  "coverage_kind": "model-free structural and guard-contract coverage",
+  "edges": [
+    { "id": "e01", "positive": "missing Plan", "negative": "verified Plan" },
+    { "id": "e02", "positive": "verified Plan", "negative": "missing Plan" },
+    { "id": "e03", "positive": "diagnosis committed", "negative": "invalid state update" },
+    { "id": "e04", "positive": "USER owner", "negative": "non-USER owner" },
+    { "id": "e05", "positive": "EXTERNAL owner", "negative": "user preference" },
+    { "id": "e06", "positive": "SHARED owner", "negative": "unowned gap" },
+    { "id": "e07", "positive": "FRAME owner", "negative": "grounded frame" },
+    { "id": "e08", "positive": "validated response", "negative": "silence or timeout" },
+    { "id": "e09", "positive": "validated evidence", "negative": "unsupported claim" },
+    { "id": "e10", "positive": "explicit disposition", "negative": "model-only interpretation" },
+    { "id": "e11", "positive": "challenge disposition", "negative": "unchanged repetition" },
+    { "id": "e12", "positive": "active macrostep", "negative": "no material delta" },
+    { "id": "e13", "positive": "full closure", "negative": "flipped conjunct" },
+    { "id": "e14", "positive": "valid residual acceptance", "negative": "casual assent" },
+    { "id": "e14a", "positive": "resolved authorizer", "negative": "non-authorizer source" },
+    { "id": "e14b", "positive": "residual authorizer", "negative": "stale residual digest" },
+    { "id": "e15", "positive": "one handoff intent", "negative": "missing or conflicting intent" },
+    { "id": "e16", "positive": "one native plan", "negative": "second or substitute plan" },
+    { "id": "e17", "positive": "unreconciled outcome", "negative": "authoritative applied receipt" },
+    { "id": "e18", "positive": "trusted cancel", "negative": "no cancel" },
+    { "id": "e19", "positive": "integrity failure", "negative": "valid predecessor" },
+    { "id": "e20", "positive": "host contradiction", "negative": "capability receipt present" },
+    { "id": "e21", "positive": "zero budget unresolved", "negative": "positive budget or closure" },
+    { "id": "e22", "positive": "repeat oscillation or stall", "negative": "material progress" },
+    { "id": "e23", "positive": "no justified next action", "negative": "owned gap or ranked action" }
+  ]
+}

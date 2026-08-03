@@ -1,0 +1,22 @@
+{
+  "schema_version": "thyquery.evaluation-negative-controls.v1",
+  "status": "NOT_RUN_REQUIRES_SEPARATE_APPROVAL",
+  "controls": [
+    {
+      "id": "graph-shadow-hidden",
+      "purpose": "measure whether graph labels alone alter grading or behavior"
+    },
+    {
+      "id": "shuffled-irrelevant-edge",
+      "purpose": "detect gains attributable to extra text or calls rather than valid control structure"
+    },
+    {
+      "id": "simpler-checklist-tree",
+      "purpose": "compare guarded graph with a lower-complexity structured baseline"
+    },
+    {
+      "id": "clear-query-no-harm",
+      "purpose": "detect unnecessary questions, research, burden, or plan regression"
+    }
+  ]
+}

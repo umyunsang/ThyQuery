@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thyquery.local/spec/schemas/event-envelope.schema.json",
+  "title": "ThyQuery event envelope v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "policy_version",
+    "reducer_version",
+    "event_id",
+    "invocation_id",
+    "sequence",
+    "expected_state_version",
+    "expected_state_hash",
+    "idempotency_key",
+    "producer_kind",
+    "evidence_refs",
+    "event_type",
+    "payload"
+  ],
+  "properties": {
+    "schema_version": { "const": "thyquery.event.v1" },
+    "policy_version": { "const": "thyquery.policy.v1" },
+    "reducer_version": { "const": "thyquery.reducer.v1" },
+    "event_id": { "type": "string", "minLength": 1 },
+    "invocation_id": { "type": "string", "minLength": 1 },
+    "sequence": { "type": "integer", "minimum": 1 },
+    "expected_state_version": { "type": "integer", "minimum": 0 },
+    "expected_state_hash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "idempotency_key": { "type": "string", "minLength": 1 },
+    "producer_kind": {
+      "enum": ["REFERENCE", "HOST", "MODEL_PROPOSAL", "USER", "RESEARCH", "TEST"]
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "event_type": { "type": "string", "minLength": 1 },
+    "payload": { "type": "object" }
+  }
+}

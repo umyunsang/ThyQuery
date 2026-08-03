@@ -1,0 +1,29 @@
+{
+  "name": "decision relevant external gap",
+  "initial": {
+    "invocation_id": "fx-external-gap",
+    "original_query": "Use the current host manifest schema",
+    "host": "claude-code",
+    "transition_budget": 3
+  },
+  "events": [
+    {
+      "event_type": "PLAN_PREFLIGHT_RECORDED",
+      "payload": { "verified": true, "receipt": "synthetic-plan" },
+      "options": { "producer_kind": "HOST" }
+    },
+    {
+      "event_type": "GAP_RECORDED",
+      "payload": {
+        "gap_id": "manifest-version",
+        "owner": "EXTERNAL",
+        "materiality": 8,
+        "status": "OPEN"
+      }
+    }
+  ],
+  "expected": {
+    "next": "RESEARCH_EVIDENCE",
+    "transition_remaining": 3
+  }
+}

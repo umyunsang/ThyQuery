@@ -1,0 +1,13 @@
+{
+  "name": "thyquery",
+  "owner": {
+    "name": "ThyQuery Contributors"
+  },
+  "plugins": [
+    {
+      "name": "thyquery",
+      "source": "./plugins/claude-thyquery",
+      "description": "Plan-first intent resolution for ambiguous Claude Code requests, ending after one native plan without execution."
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thyquery.local/tests/evaluation/outcome.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "dossier_id",
+    "host",
+    "host_version",
+    "model_id",
+    "arm",
+    "trial",
+    "pair_id",
+    "compute_budget",
+    "contract_recovery",
+    "plan_fidelity",
+    "trace_integrity",
+    "burden",
+    "privacy",
+    "gate_receipts",
+    "verdict"
+  ],
+  "properties": {
+    "schema_version": { "const": "thyquery.evaluation-outcome.v1" },
+    "run_id": { "type": "string", "minLength": 1 },
+    "dossier_id": { "type": "string", "minLength": 1 },
+    "host": { "enum": ["codex", "claude-code"] },
+    "host_version": { "type": "string", "minLength": 1 },
+    "model_id": { "type": "string", "minLength": 1 },
+    "arm": { "enum": ["A", "B", "C", "D"] },
+    "trial": { "type": "integer", "minimum": 1 },
+    "pair_id": { "type": "string", "minLength": 1 },
+    "compute_budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model_turns",
+        "input_tokens",
+        "output_tokens",
+        "tool_calls",
+        "questions",
+        "sources",
+        "retries",
+        "wall_time_ms",
+        "cost_usd"
+      ],
+      "properties": {
+        "model_turns": { "type": "integer", "minimum": 0 },
+        "input_tokens": { "type": "integer", "minimum": 0 },
+        "output_tokens": { "type": "integer", "minimum": 0 },
+        "tool_calls": { "type": "integer", "minimum": 0 },
+        "questions": { "type": "integer", "minimum": 0 },
+        "sources": { "type": "integer", "minimum": 0 },
+        "retries": { "type": "integer", "minimum": 0 },
+        "wall_time_ms": { "type": "integer", "minimum": 0 },
+        "cost_usd": { "type": "number", "minimum": 0 }
+      }
+    },
+    "contract_recovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field_recall", "false_addition_rate", "provenance_precision", "grader_receipt"],
+      "properties": {
+        "field_recall": { "type": "number", "minimum": 0, "maximum": 1 },
+        "false_addition_rate": { "type": "number", "minimum": 0, "maximum": 1 },
+        "provenance_precision": { "type": "number", "minimum": 0, "maximum": 1 },
+        "grader_receipt": { "type": "string", "minLength": 1 }
+      }
+    },
+    "plan_fidelity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["criterion_coverage", "constraint_violations", "grader_receipt"],
+      "properties": {
+        "criterion_coverage": { "type": "number", "minimum": 0, "maximum": 1 },
+        "constraint_violations": { "type": "integer", "minimum": 0 },
+        "grader_receipt": { "type": "string", "minLength": 1 }
+      }
+    },
+    "trace_integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["next_edge_accuracy", "state_invariant_violations", "terminal_errors", "receipt"],
+      "properties": {
+        "next_edge_accuracy": { "type": "number", "minimum": 0, "maximum": 1 },
+        "state_invariant_violations": { "type": "integer", "minimum": 0 },
+        "terminal_errors": { "type": "integer", "minimum": 0 },
+        "receipt": { "type": "string", "minLength": 1 }
+      }
+    },
+    "burden": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["questions", "user_time_ms", "sources", "latency_ms", "cost_usd"],
+      "properties": {
+        "questions": { "type": "integer", "minimum": 0 },
+        "user_time_ms": { "type": "integer", "minimum": 0 },
+        "sources": { "type": "integer", "minimum": 0 },
+        "latency_ms": { "type": "integer", "minimum": 0 },
+        "cost_usd": { "type": "number", "minimum": 0 }
+      }
+    },
+    "privacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["incidents", "raw_identifier_leaks", "receipt"],
+      "properties": {
+        "incidents": { "type": "integer", "minimum": 0 },
+        "raw_identifier_leaks": { "type": "integer", "minimum": 0 },
+        "receipt": { "type": "string", "minLength": 1 }
+      }
+    },
+    "gate_receipts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["host_conformance", "trace_integrity", "no_harm", "privacy"],
+      "properties": {
+        "host_conformance": { "type": "string", "minLength": 1 },
+        "trace_integrity": { "type": "string", "minLength": 1 },
+        "no_harm": { "type": "string", "minLength": 1 },
+        "privacy": { "type": "string", "minLength": 1 }
+      }
+    },
+    "verdict": {
+      "enum": [
+        "PASS",
+        "HOST_UNSUPPORTED",
+        "TRACE_INVALID",
+        "NO_GRAPH_BENEFIT_SHOWN",
+        "NO_HARM_FAILED",
+        "PRIVACY_GATE_FAILED"
+      ]
+    }
+  }
+}

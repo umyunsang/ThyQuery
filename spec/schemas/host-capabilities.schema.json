@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thyquery.local/spec/schemas/host-capabilities.schema.json",
+  "title": "ThyQuery host capability declaration v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "host",
+    "version",
+    "surface",
+    "canonical_invocation",
+    "plan_evidence",
+    "native_question",
+    "native_plan_observation",
+    "static_validation",
+    "live_conformance"
+  ],
+  "properties": {
+    "schema_version": { "const": "thyquery.host-capabilities.v1" },
+    "host": { "enum": ["codex", "claude-code"] },
+    "version": { "type": "string", "minLength": 1 },
+    "surface": { "type": "string", "minLength": 1 },
+    "canonical_invocation": { "type": "string", "minLength": 1 },
+    "plan_evidence": { "enum": ["REQUIRED", "UNAVAILABLE", "UNVERIFIED"] },
+    "native_question": { "type": "string", "minLength": 1 },
+    "native_plan_observation": { "type": "string", "minLength": 1 },
+    "static_validation": { "enum": ["PENDING", "PASS", "FAIL", "STATIC_ONLY"] },
+    "live_conformance": { "enum": ["CONFORMANCE_UNTESTED", "PASS", "HOST_UNSUPPORTED", "TRACE_INVALID"] }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": "thyquery.host-question-fixture.v1",
+  "host": "codex",
+  "semantic_outcome": "USER_GAP_PROPOSAL",
+  "gap_count": 1,
+  "option_policy": "2_TO_3_GENUINE_NATIVE_OPTIONS",
+  "correction_path": true,
+  "defer_path": true,
+  "cancel_path": true,
+  "forced_truth": false,
+  "status": "STATIC_FIXTURE_NOT_RUN"
+}

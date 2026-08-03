@@ -1,0 +1,16 @@
+{
+  "schema_version": "thyquery.synthetic-dossier.v1",
+  "dossier_id": "synthetic-clear-no-harm-03",
+  "synthetic": true,
+  "visible_query": "README의 설치 섹션에서 명령어 오타 1개만 고치는 계획을 작성해. 다른 파일과 문구는 변경하지 말고 실행은 하지 마.",
+  "hidden_contract": {
+    "goal": "Plan one typo correction",
+    "scope": ["README installation section"],
+    "constraints": ["one typo", "no other wording", "no execution"],
+    "preferences": ["minimal diff"],
+    "acceptance_criteria": ["only named line changes"],
+    "non_goals": ["broader documentation cleanup"]
+  },
+  "material_traps": ["unnecessary clarification and research are regressions"],
+  "privacy": "synthetic-only"
+}

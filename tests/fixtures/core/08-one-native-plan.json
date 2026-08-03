@@ -1,0 +1,70 @@
+{
+  "name": "one authorized native plan",
+  "initial": {
+    "invocation_id": "fx-plan-once",
+    "original_query": "Plan a fully specified task",
+    "host": "codex",
+    "transition_budget": 1
+  },
+  "events": [
+    {
+      "event_type": "PLAN_PREFLIGHT_RECORDED",
+      "payload": { "verified": true, "receipt": "synthetic-plan" },
+      "options": { "producer_kind": "HOST" }
+    },
+    {
+      "event_type": "CLOSURE_RECOMPUTED",
+      "payload": {
+        "graph_ok": true,
+        "philosophical_ok": true,
+        "coverage_ok": true,
+        "risk_ok": true,
+        "conflict_ok": true,
+        "stable_ok": true,
+        "voi_ok": true,
+        "cal_ok": true,
+        "plan_input_ready": true,
+        "no_unauthorized_intent_drift": true
+      }
+    },
+    {
+      "event_type": "USER_RESPONSE_RECORDED",
+      "payload": {
+        "source_ref": "synthetic-native-acceptance",
+        "disposition": "CONFIRMED",
+        "content_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "material_targets": ["contract.acceptance"],
+        "acceptance": {
+          "kind": "RESOLVED",
+          "contract_digest": "$CURRENT_CONTRACT_DIGEST",
+          "authority_confirmed": true,
+          "comprehension_confirmed": true
+        }
+      },
+      "options": { "producer_kind": "USER" }
+    },
+    {
+      "event_type": "HANDOFF_INTENT_RECORDED",
+      "payload": {
+        "handoff_key": "$HANDOFF_KEY",
+        "contract_digest": "$CURRENT_CONTRACT_DIGEST",
+        "authorization_kind": "EPISTEMIC_CLOSED"
+      }
+    },
+    {
+      "event_type": "NATIVE_PLAN_OBSERVED",
+      "payload": {
+        "receipt": "synthetic-native-plan",
+        "handoff_key": "$HANDOFF_KEY",
+        "contract_digest": "$CURRENT_CONTRACT_DIGEST"
+      },
+      "options": { "producer_kind": "HOST" }
+    }
+  ],
+  "expected": {
+    "next": "COMPLETE_AFTER_PLAN",
+    "terminal_state": "COMPLETE_AFTER_PLAN",
+    "transition_remaining": 0,
+    "native_plan_count": 1
+  }
+}

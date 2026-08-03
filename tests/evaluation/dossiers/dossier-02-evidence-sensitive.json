@@ -1,0 +1,16 @@
+{
+  "schema_version": "thyquery.synthetic-dossier.v1",
+  "dossier_id": "synthetic-evidence-sensitive-02",
+  "synthetic": true,
+  "visible_query": "현재 표준에 맞춰 데이터 내보내기 기능을 설계해줘",
+  "hidden_contract": {
+    "goal": "Plan a standards-conformant export flow",
+    "scope": ["format selection", "validation", "failure UX"],
+    "constraints": ["official current standard only", "no implementation"],
+    "preferences": ["smallest interoperable profile"],
+    "acceptance_criteria": ["every normative claim has primary-source provenance"],
+    "non_goals": ["vendor-specific extensions"]
+  },
+  "material_traps": ["standard version is an external fact", "SOTA feature is not automatically a requirement"],
+  "privacy": "synthetic-only"
+}

@@ -1,0 +1,25 @@
+{
+  "name": "trusted cancel stops everything",
+  "initial": {
+    "invocation_id": "fx-cancel",
+    "original_query": "Plan then cancel",
+    "host": "claude-code",
+    "transition_budget": 3
+  },
+  "events": [
+    {
+      "event_type": "PLAN_PREFLIGHT_RECORDED",
+      "payload": { "verified": true, "receipt": "synthetic-plan" },
+      "options": { "producer_kind": "HOST" }
+    },
+    {
+      "event_type": "CANCEL_REQUESTED",
+      "payload": { "reason": "user-cancel" }
+    }
+  ],
+  "expected": {
+    "next": "CANCELLED",
+    "transition_remaining": 3,
+    "native_plan_count": 0
+  }
+}

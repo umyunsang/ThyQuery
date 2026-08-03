@@ -1,0 +1,30 @@
+{
+  "name": "highest material user gap",
+  "initial": {
+    "invocation_id": "fx-user-gap",
+    "original_query": "Make it feel better",
+    "host": "codex",
+    "transition_budget": 3
+  },
+  "events": [
+    {
+      "event_type": "PLAN_PREFLIGHT_RECORDED",
+      "payload": { "verified": true, "receipt": "synthetic-plan" },
+      "options": { "producer_kind": "HOST" }
+    },
+    {
+      "event_type": "GAP_RECORDED",
+      "payload": {
+        "gap_id": "tone",
+        "owner": "USER",
+        "materiality": 9,
+        "status": "OPEN"
+      }
+    }
+  ],
+  "expected": {
+    "next": "ASK_USER",
+    "transition_remaining": 3,
+    "native_plan_count": 0
+  }
+}

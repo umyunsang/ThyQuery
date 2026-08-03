@@ -1,0 +1,14 @@
+{
+  "schema_version": "thyquery.guard-fixture-matrix.v1",
+  "guards": [
+    { "id": "P0_CANCEL_EFFECT_FENCE", "positive": "trusted cancel routes CANCELLED", "negative": "no cancel permits lower guards" },
+    { "id": "P1_INTEGRITY_ABSORPTION", "positive": "key collision routes STATE_CORRUPT", "negative": "same-key same-payload is no-op" },
+    { "id": "P2_HOST_NON_WAIVABLE", "positive": "missing Plan routes PLAN_MODE_REQUIRED", "negative": "verified Plan permits refinement" },
+    { "id": "P3_RESOLVED", "positive": "all conjuncts and current digest close", "negative": "each flipped conjunct blocks closure" },
+    { "id": "P4_ACCEPTED_RESIDUAL", "positive": "enumerated current-digest ledger closes", "negative": "wrong digest or missing fields does not close" },
+    { "id": "P5_RESOURCE_EXHAUSTION", "positive": "zero budget unresolved is RESOURCE_EXHAUSTED", "negative": "valid pre-existing closure wins before cap" },
+    { "id": "P6_PROGRESS_FAILURE", "positive": "oscillation is STALLED", "negative": "new material evidence is progress" },
+    { "id": "P7_UNCERTAINTY_OWNER", "positive": "highest material owner selects native action", "negative": "resolved gaps are excluded" },
+    { "id": "P8_ACTION_RANKING", "positive": "value burden and edge id select deterministically", "negative": "disabled actions are excluded" }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": "thyquery.guard-precedence.v1",
+  "guards": [
+    {
+      "priority": 0,
+      "id": "P0_CANCEL_EFFECT_FENCE",
+      "meaning": "Trusted cancel, uncertain handoff, post-plan absorption, and forbidden-effect fencing"
+    },
+    {
+      "priority": 1,
+      "id": "P1_INTEGRITY_ABSORPTION",
+      "meaning": "Schema, version, predecessor, idempotency, reducer, and terminal-integrity failures"
+    },
+    {
+      "priority": 2,
+      "id": "P2_HOST_NON_WAIVABLE",
+      "meaning": "Verified stock Plan and host capability requirements"
+    },
+    {
+      "priority": 3,
+      "id": "P3_RESOLVED",
+      "meaning": "Independently recomputed epistemic closure bound to the current contract"
+    },
+    {
+      "priority": 4,
+      "id": "P4_ACCEPTED_RESIDUAL",
+      "meaning": "Explicit, informed residual acceptance bound to the current contract"
+    },
+    {
+      "priority": 5,
+      "id": "P5_RESOURCE_EXHAUSTION",
+      "meaning": "Finite transition budget reached without success"
+    },
+    {
+      "priority": 6,
+      "id": "P6_PROGRESS_FAILURE",
+      "meaning": "Exact repeat, oscillation, semantic stall, or unproductive SCC"
+    },
+    {
+      "priority": 7,
+      "id": "P7_UNCERTAINTY_OWNER",
+      "meaning": "Route the highest-materiality open gap to its legitimate owner"
+    },
+    {
+      "priority": 8,
+      "id": "P8_ACTION_RANKING",
+      "meaning": "Select a deterministic positive-net-value action with a frozen tie-break"
+    }
+  ]
+}

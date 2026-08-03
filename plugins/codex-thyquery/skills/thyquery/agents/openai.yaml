@@ -1,0 +1,7 @@
+interface:
+  display_name: "ThyQuery"
+  short_description: "Clarify ambiguous requests before native Plan"
+  default_prompt: "Use $thyquery to resolve material ambiguity before producing one native plan."
+
+policy:
+  allow_implicit_invocation: false

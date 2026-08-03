@@ -1,0 +1,52 @@
+{
+  "schema_version": "thyquery.evaluation-arms.v1",
+  "status": "NOT_RUN_REQUIRES_SEPARATE_APPROVAL",
+  "arms": {
+    "A": {
+      "name": "stock Plan",
+      "intent_layer": "none",
+      "controller": "stock",
+      "native_planner": "same-host-stock-plan"
+    },
+    "B": {
+      "name": "matched Ralph loop only",
+      "intent_layer": "ralph",
+      "controller": "linear-loop",
+      "native_planner": "same-host-stock-plan",
+      "contract_schema": "thyquery.intent-contract.v1",
+      "prompt_policy": "frozen-v1",
+      "action_repertoire": "frozen-v1",
+      "evidence_corpus": "frozen-v1",
+      "termination_budget": "frozen-v1",
+      "model": "same-within-pair",
+      "tools": "same-within-pair",
+      "facts": "same-within-pair"
+    },
+    "C": {
+      "name": "guarded graph plus matched Ralph loop",
+      "intent_layer": "ralph",
+      "controller": "B-GUARDED",
+      "native_planner": "same-host-stock-plan",
+      "contract_schema": "thyquery.intent-contract.v1",
+      "prompt_policy": "frozen-v1",
+      "action_repertoire": "frozen-v1",
+      "evidence_corpus": "frozen-v1",
+      "termination_budget": "frozen-v1",
+      "model": "same-within-pair",
+      "tools": "same-within-pair",
+      "facts": "same-within-pair"
+    },
+    "D": {
+      "name": "oracle intent contract ceiling",
+      "intent_layer": "sealed-oracle-contract",
+      "controller": "none",
+      "native_planner": "same-host-stock-plan"
+    }
+  },
+  "estimands": {
+    "B-A": "increment from iterative intent resolution",
+    "C-B": "primary increment from guarded graph control",
+    "D-C": "remaining intent-controller headroom"
+  },
+  "thresholds": "UNSET_PENDING_PILOT"
+}

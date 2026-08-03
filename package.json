@@ -1,0 +1,36 @@
+{
+  "name": "thyquery",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Plan-first intent-resolution contracts and two instruction-only host plugin candidates.",
+  "scripts": {
+    "test": "node --test",
+    "test:unit": "node --test tests/unit/*.test.mjs tests/contracts/*.test.mjs",
+    "test:graph": "node --test tests/graph/*.test.mjs",
+    "test:packaging": "node --test tests/packaging/*.test.mjs",
+    "test:runner": "node --test tests/live-validation/*.test.mjs",
+    "fixtures": "node tools/replay-fixtures.mjs tests/fixtures/core",
+    "runner:doctor": "node tools/live-validation-runner.mjs doctor --json",
+    "runner:dry": "node tools/live-validation-runner.mjs dry-run --json",
+    "runner:propose": "node tools/live-validation-runner.mjs propose --json",
+    "runner:probe-codex": "node tools/live-validation-runner.mjs probe-codex --json",
+    "validate:manifests": "node tools/validate-manifests.mjs",
+    "validate:packages": "node tools/validate-packages.mjs",
+    "validate:parity": "node tools/check-generated-parity.mjs",
+    "validate": "npm run validate:manifests && npm run validate:packages && npm run validate:parity",
+    "check": "npm test && npm run validate && npm run fixtures && npm run runner:doctor && npm run runner:dry"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/umyunsang/ThyQuery.git"
+  },
+  "homepage": "https://github.com/umyunsang/ThyQuery",
+  "bugs": {
+    "url": "https://github.com/umyunsang/ThyQuery/issues"
+  }
+}

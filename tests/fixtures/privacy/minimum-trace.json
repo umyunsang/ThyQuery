@@ -1,0 +1,29 @@
+{
+  "schema_version": "thyquery.privacy-fixture.v1",
+  "synthetic": true,
+  "input": {
+    "original_query": "Contact synthetic.person@example.invalid with tq_test_NEVER_LEAK",
+    "answer": "synthetic private preference",
+    "secret": "tq_test_NEVER_LEAK"
+  },
+  "allowed_trace_keys": [
+    "invocation_id",
+    "host",
+    "original_query_digest",
+    "contract_digest",
+    "contract_version",
+    "evidence_count",
+    "open_gap_count",
+    "transition_remaining",
+    "state_version",
+    "state_hash",
+    "terminal",
+    "handoff_outcome",
+    "native_plan_count"
+  ],
+  "forbidden_values": [
+    "synthetic.person@example.invalid",
+    "synthetic private preference",
+    "tq_test_NEVER_LEAK"
+  ]
+}

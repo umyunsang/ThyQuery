@@ -1,0 +1,25 @@
+{
+  "name": "semantic oscillation is stalled",
+  "initial": {
+    "invocation_id": "fx-stall",
+    "original_query": "Keep reconsidering the same framing",
+    "host": "codex",
+    "transition_budget": 3
+  },
+  "events": [
+    {
+      "event_type": "PLAN_PREFLIGHT_RECORDED",
+      "payload": { "verified": true, "receipt": "synthetic-plan" },
+      "options": { "producer_kind": "HOST" }
+    },
+    {
+      "event_type": "STALL_RECORDED",
+      "payload": { "oscillation": true }
+    }
+  ],
+  "expected": {
+    "next": "STALLED",
+    "terminal_state": "STALLED",
+    "transition_remaining": 3
+  }
+}

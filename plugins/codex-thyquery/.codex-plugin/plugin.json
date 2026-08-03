@@ -1,0 +1,28 @@
+{
+  "name": "codex-thyquery",
+  "version": "0.1.0",
+  "description": "Plan-first intent resolution for ambiguous Codex requests, ending after one native plan without execution.",
+  "author": {
+    "name": "ThyQuery Contributors"
+  },
+  "keywords": [
+    "clarification",
+    "planning",
+    "requirements"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "ThyQuery for Codex",
+    "shortDescription": "Clarify ambiguous requests before native Plan",
+    "longDescription": "An explicit Plan-mode pre-layer that elicits material intent, checks bounded evidence, preserves residual uncertainty, and stops after one Codex-native plan.",
+    "developerName": "ThyQuery Contributors",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Search"
+    ],
+    "defaultPrompt": [
+      "$thyquery Turn my ambiguous request into one concrete native plan without executing it."
+    ]
+  }
+}

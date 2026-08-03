@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thyquery.local/spec/schemas/terminal-outcome.schema.json",
+  "title": "ThyQuery terminal outcome v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "kind", "authorizes_handoff", "native_plan_count", "reason"],
+  "properties": {
+    "schema_version": { "const": "thyquery.terminal-outcome.v1" },
+    "kind": {
+      "enum": [
+        "PLAN_MODE_REQUIRED",
+        "EPISTEMIC_CLOSED",
+        "ACCEPTED_RESIDUAL",
+        "CANCELLED",
+        "BLOCKED",
+        "STALLED",
+        "RESOURCE_EXHAUSTED",
+        "STATE_CORRUPT",
+        "HOST_CAPABILITY_CONTRADICTION",
+        "HANDOFF_OUTCOME_UNKNOWN",
+        "COMPLETE_AFTER_PLAN"
+      ]
+    },
+    "authorizes_handoff": { "type": "boolean" },
+    "native_plan_count": { "type": "integer", "minimum": 0, "maximum": 1 },
+    "reason": { "type": "string", "minLength": 1 }
+  }
+}

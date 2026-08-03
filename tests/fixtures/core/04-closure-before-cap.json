@@ -1,0 +1,51 @@
+{
+  "name": "valid closure at zero budget",
+  "initial": {
+    "invocation_id": "fx-closure",
+    "original_query": "Plan a completely specified synthetic task",
+    "host": "codex",
+    "transition_budget": 1
+  },
+  "events": [
+    {
+      "event_type": "PLAN_PREFLIGHT_RECORDED",
+      "payload": { "verified": true, "receipt": "synthetic-plan" },
+      "options": { "producer_kind": "HOST" }
+    },
+    {
+      "event_type": "CLOSURE_RECOMPUTED",
+      "payload": {
+        "graph_ok": true,
+        "philosophical_ok": true,
+        "coverage_ok": true,
+        "risk_ok": true,
+        "conflict_ok": true,
+        "stable_ok": true,
+        "voi_ok": true,
+        "cal_ok": true,
+        "plan_input_ready": true,
+        "no_unauthorized_intent_drift": true
+      }
+    },
+    {
+      "event_type": "USER_RESPONSE_RECORDED",
+      "payload": {
+        "source_ref": "synthetic-native-acceptance",
+        "disposition": "CONFIRMED",
+        "content_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "material_targets": ["contract.acceptance"],
+        "acceptance": {
+          "kind": "RESOLVED",
+          "contract_digest": "$CURRENT_CONTRACT_DIGEST",
+          "authority_confirmed": true,
+          "comprehension_confirmed": true
+        }
+      },
+      "options": { "producer_kind": "USER" }
+    }
+  ],
+  "expected": {
+    "next": "EPISTEMIC_CLOSED",
+    "transition_remaining": 0
+  }
+}

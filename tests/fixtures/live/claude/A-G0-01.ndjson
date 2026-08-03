@@ -1,0 +1,5 @@
+{"schema_version":"thyquery.synthetic-claude-stream.v1","case_id":"A-G0-01","type":"system","event":"SESSION_INIT"}
+{"schema_version":"thyquery.synthetic-claude-stream.v1","case_id":"A-G0-01","type":"assistant","message_id":"g001-a1","event":"INVOCATION_OBSERVED"}
+{"schema_version":"thyquery.synthetic-claude-stream.v1","case_id":"A-G0-01","type":"assistant","message_id":"g001-a2","event":"PLAN_RECEIPT"}
+{"schema_version":"thyquery.synthetic-claude-stream.v1","case_id":"A-G0-01","type":"assistant","message_id":"g001-a3","event":"RALPH_ACTION"}
+{"schema_version":"thyquery.synthetic-claude-stream.v1","case_id":"A-G0-01","type":"result","event":"G0_PASS"}

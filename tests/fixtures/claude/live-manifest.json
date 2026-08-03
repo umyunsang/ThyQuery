@@ -1,0 +1,120 @@
+{
+  "schema_version": "thyquery.live-validation.v1",
+  "status": "NOT_RUN_REQUIRES_SEPARATE_APPROVAL",
+  "host": "claude-code",
+  "host_version": "2.1.220",
+  "surface": "workspace-local plugin candidate; isolation method unresolved",
+  "canonical_invocation": "/thyquery:thyquery <query>",
+  "isolation": {
+    "status": "ISOLATION_METHOD_UNRESOLVED",
+    "loader_method": null,
+    "config_target": null,
+    "temporary_paths": [],
+    "recoverability_proof": null,
+    "cleanup_receipt": null,
+    "persistent_install": false,
+    "marketplace_registration": false,
+    "real_config_mutation": false,
+    "paid_calls_allowed": false,
+    "plan_execution_allowed": false,
+    "cleanup_required": true
+  },
+  "budget": {
+    "case_count": 9,
+    "max_model_turns_per_case": "UNSET_PENDING_APPROVAL",
+    "max_cost": "UNSET_PENDING_APPROVAL",
+    "deadline": "UNSET_PENDING_APPROVAL"
+  },
+  "cases": [
+    {
+      "id": "A-G0-01",
+      "name": "canonical namespaced invocation in verified Plan",
+      "preconditions": ["fresh isolated session", "stock Plan active", "no prior ThyQuery state"],
+      "action": "/thyquery:thyquery synthetic ambiguous request",
+      "expected": ["explicit invocation observed", "Plan receipt precedes Ralph action"],
+      "forbidden": ["EnterPlanMode", "/plan composition", "edit", "execution"],
+      "cleanup": ["discard isolated session state"],
+      "verdict": { "pass": "G0_PASS", "fail": "HOST_UNSUPPORTED" }
+    },
+    {
+      "id": "A-G0-02",
+      "name": "outside Plan fails closed",
+      "preconditions": ["fresh isolated non-Plan session"],
+      "action": "/thyquery:thyquery synthetic request",
+      "expected": ["PLAN_MODE_REQUIRED", "zero questions", "zero research", "zero plans"],
+      "forbidden": ["EnterPlanMode", "prose fallback", "handoff"],
+      "cleanup": ["discard isolated session state"],
+      "verdict": { "pass": "G0_PASS", "fail": "TRACE_INVALID" }
+    },
+    {
+      "id": "A-G0-03",
+      "name": "native one-gap question",
+      "preconditions": ["verified Plan", "one user-owned material gap"],
+      "action": "run one Ralph boundary",
+      "expected": ["one AskUserQuestion call", "correction path", "defer or cancel path"],
+      "forbidden": ["fixed questionnaire", "web substitution for preference"],
+      "cleanup": ["discard isolated session state"],
+      "verdict": { "pass": "G0_PASS", "fail": "HOST_CAPABILITY_CONTRADICTION" }
+    },
+    {
+      "id": "A-G0-04",
+      "name": "trusted cancel",
+      "preconditions": ["verified Plan", "active ThyQuery invocation"],
+      "action": "select cancel",
+      "expected": ["CANCELLED", "zero handoffs", "zero later effects"],
+      "forbidden": ["background continuation", "native plan"],
+      "cleanup": ["discard invocation state"],
+      "verdict": { "pass": "G0_PASS", "fail": "TRACE_INVALID" }
+    },
+    {
+      "id": "A-G1-01",
+      "name": "guard order and cap non-success",
+      "preconditions": ["verified Plan", "unresolved gap", "exhausted transition budget"],
+      "action": "recompute guards",
+      "expected": ["RESOURCE_EXHAUSTED", "zero handoffs"],
+      "forbidden": ["cap-as-success", "model done token as closure"],
+      "cleanup": ["discard isolated session state"],
+      "verdict": { "pass": "G1_PASS", "fail": "TRACE_INVALID" }
+    },
+    {
+      "id": "A-G1-02",
+      "name": "one accepted contract to one native plan",
+      "preconditions": ["verified Plan", "current-digest closure", "no prior handoff"],
+      "action": "fence handoff and observe native Plan",
+      "expected": ["one handoff intent", "one native plan", "COMPLETE_AFTER_PLAN"],
+      "forbidden": ["ExitPlanMode as provenance substitute", "second plan", "edit", "execution"],
+      "cleanup": ["capture redacted receipts", "discard isolated session state"],
+      "verdict": { "pass": "G1_PASS", "fail": "TRACE_INVALID" }
+    },
+    {
+      "id": "A-G1-03",
+      "name": "uncertain handoff is not retried",
+      "preconditions": ["verified Plan", "authorized handoff", "ambiguous application receipt"],
+      "action": "reconcile once",
+      "expected": ["HANDOFF_OUTCOME_UNKNOWN", "zero retry"],
+      "forbidden": ["blind retry", "exactly-once claim"],
+      "cleanup": ["discard isolated session state"],
+      "verdict": { "pass": "G1_PASS", "fail": "HANDOFF_GATE_FAILED" }
+    },
+    {
+      "id": "A-G1-04",
+      "name": "clear-query no-harm path",
+      "preconditions": ["verified Plan", "decision-sufficient synthetic request"],
+      "action": "/thyquery:thyquery fully specified request",
+      "expected": ["no unnecessary question", "one accepted contract", "one native plan"],
+      "forbidden": ["ceremonial deep research", "invented ambiguity"],
+      "cleanup": ["discard isolated session state"],
+      "verdict": { "pass": "G1_PASS", "fail": "NO_HARM_FAILED" }
+    },
+    {
+      "id": "A-G1-05",
+      "name": "instruction-first lineage compliance",
+      "preconditions": ["verified Plan", "multi-step synthetic trace"],
+      "action": "audit redacted event lineage",
+      "expected": ["single invocation", "ordered current-contract lineage", "P0-P8 order", "terminal absorption"],
+      "forbidden": ["invented receipt", "stale acceptance", "post-terminal effect"],
+      "cleanup": ["retain only redacted test receipt", "discard session"],
+      "verdict": { "pass": "G1_PASS", "fail": "TRACE_INVALID" }
+    }
+  ]
+}

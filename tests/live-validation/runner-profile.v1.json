@@ -1,0 +1,252 @@
+{
+  "schema_version": "thyquery.runner-profile.v1",
+  "status": "DRY_VALIDATION_ONLY",
+  "authorization": {
+    "epoch": "LVP@v3-A",
+    "execution_authorized": false,
+    "plugin_load_authorized": false,
+    "model_invocation_authorized": false,
+    "config_mutation_authorized": false,
+    "plan_execution_authorized": false
+  },
+  "command_surface": [
+    "doctor",
+    "dry-run",
+    "propose",
+    "probe-codex"
+  ],
+  "claude": {
+    "required_version": "2.1.220",
+    "status": "LIVE_RUN_PROPOSAL_BLOCKED",
+    "host_disposition": "HOST_UNSUPPORTED_IN_CURRENT_APPROVAL_EPOCH",
+    "package_digest": "sha256:58d640b357e3a75a304e5ee55672e745089a671b84aecc2b5fa6c0377c50d9e4",
+    "g0_case_ids": [
+      "A-G0-01",
+      "A-G0-02",
+      "A-G0-03",
+      "A-G0-04"
+    ],
+    "execution_order": "serial",
+    "command": {
+      "executable": "<CLAUDE_BIN>",
+      "shell": false,
+      "cwd": "<CASE_ROOT>/work",
+      "required_environment": {},
+      "required_secret_env_names": [
+        "ANTHROPIC_API_KEY"
+      ],
+      "argv": [
+        "--bare",
+        "--print",
+        "--input-format",
+        "stream-json",
+        "--output-format",
+        "stream-json",
+        "--replay-user-messages",
+        "--prompt-suggestions",
+        "false",
+        "--permission-mode",
+        "plan",
+        "--plugin-dir",
+        "<CLAUDE_PLUGIN_DIR>",
+        "--no-session-persistence",
+        "--model",
+        "<PINNED_MODEL>",
+        "--max-budget-usd",
+        "0.50",
+        "--setting-sources",
+        "local",
+        "--settings",
+        "<CASE_ROOT>/work/settings.json",
+        "--mcp-config",
+        "<CASE_ROOT>/work/mcp.json",
+        "--strict-mcp-config",
+        "--no-chrome",
+        "--tools",
+        "Read,AskUserQuestion",
+        "--allowedTools",
+        "Read,AskUserQuestion",
+        "--session-id",
+        "<CASE_UUID>"
+      ]
+    },
+    "tools": {
+      "available": [
+        "Read",
+        "AskUserQuestion"
+      ],
+      "allowed_without_prompt": [
+        "Read",
+        "AskUserQuestion"
+      ],
+      "unexpected_tool_use": "TERMINATE_CASE"
+    },
+    "budgets": {
+      "assistant_turns_per_case": 12,
+      "usd_per_case": 0.5,
+      "usd_suite": 2,
+      "wall_clock_ms_per_case": 180000,
+      "wall_clock_ms_suite": 900000
+    },
+    "temp": {
+      "root": "<SYSTEM_TMP>/thyquery-lvp-v3/<RUN_ID>",
+      "case_root": "<SYSTEM_TMP>/thyquery-lvp-v3/<RUN_ID>/<CASE_ID>",
+      "required_case_entries": [
+        "tmp/",
+        "work/",
+        "work/settings.json",
+        "work/mcp.json",
+        "stdin.ndjson",
+        "stdout.ndjson",
+        "stderr.log"
+      ]
+    },
+    "settings": {
+      "bare": true,
+      "setting_sources": [
+        "local"
+      ],
+      "explicit_settings_json": {},
+      "require_absent_discovered_local_settings": true
+    },
+    "mcp": {
+      "strict": true,
+      "explicit_mcp_json": {
+        "mcpServers": {}
+      },
+      "required_server_count": 0
+    },
+    "stream": {
+      "encoding": "UTF-8",
+      "framing": "NDJSON",
+      "initial_input": "ONE_USER_RECORD_WITH_NAMESPACED_SLASH_INVOCATION",
+      "keep_stdin_open_for_questions": true,
+      "replay_user_messages": true,
+      "partial_messages": false,
+      "hook_events": false,
+      "forwarded_subagent_messages": false,
+      "unknown_record_action": "FAIL_CLOSED"
+    },
+    "turn_counter": {
+      "unit": "COMPLETED_TOP_LEVEL_ASSISTANT_MESSAGE",
+      "dedupe_key": "message.id",
+      "excluded_record_kinds": [
+        "partial_stream_chunk",
+        "replayed_user_message",
+        "system_record",
+        "result_record",
+        "nested_or_forwarded_subagent_message"
+      ],
+      "over_limit_actions": [
+        "CLOSE_STDIN",
+        "SIGTERM_PROCESS_GROUP",
+        "WAIT_5000_MS",
+        "SIGKILL_PROCESS_GROUP"
+      ]
+    },
+    "cleanup": [
+      "VERIFY_PROCESS_GROUP_DEAD",
+      "VERIFY_PLUGIN_DIGEST_UNCHANGED",
+      "COMPARE_NAMED_USER_AND_PROJECT_CONFIG_MANIFESTS",
+      "VERIFY_NO_SESSION_ARTIFACT_IN_PROTECTED_TARGETS",
+      "REDACT_AUTH_AND_RAW_PATHS_FROM_RECEIPT",
+      "REMOVE_ONLY_VALIDATED_CASE_TEMP_ROOT",
+      "VERIFY_TEMP_ROOT_ABSENT",
+      "NEVER_READ_OR_TOUCH_DOT_REMEMBER",
+      "ON_PROTECTED_DELTA_FAIL_WITHOUT_AUTO_RESTORE"
+    ],
+    "protected_targets": {
+      "manifest_mode": "NAMES_AND_METADATA_ONLY_NO_CONTENTS",
+      "named_targets": [
+        "<REAL_HOME>/.claude.json",
+        "<REAL_HOME>/.claude/",
+        "<REAL_HOME>/.config/claude/",
+        "<PROJECT_ROOT>/.claude/",
+        "<PROJECT_ROOT>/.mcp.json"
+      ],
+      "never_access": [
+        "<PROJECT_ROOT>/.remember/"
+      ],
+      "on_delta": "FAIL_WITHOUT_AUTO_RESTORE"
+    },
+    "blockers": [
+      "PINNED_EXECUTABLE_PATH_AND_DIGEST_UNSET",
+      "PINNED_MODEL_UNSET",
+      "NDJSON_INPUT_SCHEMA_UNDOCUMENTED",
+      "NDJSON_OUTPUT_SCHEMA_UNDOCUMENTED",
+      "ASK_USER_QUESTION_CORRELATION_UNDOCUMENTED",
+      "NATIVE_PLAN_OBSERVATION_SIGNAL_UNDOCUMENTED",
+      "BUDGET_ENFORCEMENT_RUNTIME_UNVERIFIED",
+      "NON_SESSION_CONFIG_CACHE_ISOLATION_UNPROVEN",
+      "HOME_AND_XDG_REDIRECTION_INTENTIONALLY_UNSPECIFIED",
+      "MANAGED_POLICY_DISABLEMENT_UNPROVEN",
+      "AUTH_SECRET_PROVISION_UNVERIFIED"
+    ]
+  },
+  "codex": {
+    "required_version": "0.146.0",
+    "status": "ISOLATION_METHOD_UNRESOLVED",
+    "host_disposition": "HOST_UNSUPPORTED_IN_CURRENT_APPROVAL_EPOCH",
+    "probe_scope": "READ_ONLY_HELP_ONLY",
+    "probe_allowlist": [
+      ["codex", "--version"],
+      ["codex", "--help"],
+      ["codex", "plugin", "--help"],
+      ["codex", "plugin", "add", "--help"],
+      ["codex", "plugin", "marketplace", "--help"],
+      ["codex", "plugin", "marketplace", "add", "--help"],
+      ["codex", "app-server", "--help"],
+      ["codex", "app-server", "generate-json-schema", "--help"]
+    ],
+    "loader_argv": null,
+    "no_config_cache_mutation_path": "ISOLATION_METHOD_UNRESOLVED",
+    "evidence_codes": [
+      "PLUGIN_ADD_REQUIRES_CONFIGURED_MARKETPLACE",
+      "LOCAL_MARKETPLACE_ADD_CONFIGURES_SOURCE",
+      "APP_SERVER_HAS_NO_DOCUMENTED_PLUGIN_LOADER",
+      "SCHEMA_GENERATOR_REQUIRES_OUTPUT_DIRECTORY"
+    ],
+    "forbidden_operations": [
+      "PLUGIN_ADD",
+      "PLUGIN_MARKETPLACE_ADD",
+      "APP_SERVER_START",
+      "GENERATE_JSON_SCHEMA_WITH_OUT",
+      "MODEL_INVOCATION",
+      "CONFIG_OR_CACHE_MUTATION"
+    ],
+    "protected_targets": {
+      "manifest_mode": "NAMES_AND_METADATA_ONLY_NO_CONTENTS",
+      "named_targets": [
+        "<REAL_HOME>/.codex/config.toml",
+        "<REAL_HOME>/.codex/plugins/",
+        "<REAL_HOME>/.codex/marketplaces/",
+        "<PROJECT_ROOT>/.codex/"
+      ],
+      "never_access": [
+        "<PROJECT_ROOT>/.remember/"
+      ],
+      "on_delta": "FAIL_WITHOUT_AUTO_RESTORE"
+    }
+  },
+  "receipt_policy": {
+    "allowlisted_fields": [
+      "schema_version",
+      "case_id",
+      "verdict",
+      "trace_sha256",
+      "assistant_turns",
+      "counters",
+      "live_case_executed",
+      "model_invoked"
+    ],
+    "forbidden_raw_fields": [
+      "query",
+      "answer",
+      "source_text",
+      "raw_path",
+      "api_key",
+      "stdout",
+      "stderr"
+    ]
+  }
+}

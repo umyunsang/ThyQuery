@@ -1,0 +1,16 @@
+{
+  "schema_version": "thyquery.synthetic-dossier.v1",
+  "dossier_id": "synthetic-ambiguous-feature-01",
+  "synthetic": true,
+  "visible_query": "로그인 화면을 더 좋게 만들어줘",
+  "hidden_contract": {
+    "goal": "Reduce mobile sign-in abandonment",
+    "scope": ["existing mobile web sign-in screen"],
+    "constraints": ["retain password login", "no new identity provider", "WCAG AA"],
+    "preferences": ["clarity over novelty"],
+    "acceptance_criteria": ["keyboard path remains complete", "existing API unchanged"],
+    "non_goals": ["backend auth migration"]
+  },
+  "material_traps": ["better is underspecified", "visual redesign could imply backend scope"],
+  "privacy": "synthetic-only"
+}

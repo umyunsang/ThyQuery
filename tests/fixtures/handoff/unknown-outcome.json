@@ -1,0 +1,14 @@
+{
+  "schema_version": "thyquery.handoff-fixture.v1",
+  "name": "uncertain native-plan application",
+  "precondition": "one authorized current-contract handoff intent",
+  "observation": "host application cannot be reconciled",
+  "expected_terminal": "HANDOFF_OUTCOME_UNKNOWN",
+  "retry_count": 0,
+  "forbidden": [
+    "blind retry",
+    "second handoff intent",
+    "exactly-once claim",
+    "plan execution"
+  ]
+}

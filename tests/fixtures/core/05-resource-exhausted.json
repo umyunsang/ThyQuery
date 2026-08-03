@@ -1,0 +1,22 @@
+{
+  "name": "cap is non-success",
+  "initial": {
+    "invocation_id": "fx-cap",
+    "original_query": "Plan an unresolved task",
+    "host": "claude-code",
+    "transition_budget": 0
+  },
+  "events": [
+    {
+      "event_type": "PLAN_PREFLIGHT_RECORDED",
+      "payload": { "verified": true, "receipt": "synthetic-plan" },
+      "options": { "producer_kind": "HOST" }
+    }
+  ],
+  "expected": {
+    "next": "RESOURCE_EXHAUSTED",
+    "terminal_state": "RESOURCE_EXHAUSTED",
+    "transition_remaining": 0,
+    "native_plan_count": 0
+  }
+}

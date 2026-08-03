@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thyquery.local/spec/schemas/canonical-state.schema.json",
+  "title": "ThyQuery canonical invocation state v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "policy_version",
+    "reducer_version",
+    "invocation",
+    "plan_preflight",
+    "contract",
+    "evidence",
+    "gaps",
+    "action_space",
+    "closure",
+    "residual_acceptance",
+    "budgets",
+    "progress",
+    "handoff",
+    "privacy",
+    "integrity"
+  ],
+  "properties": {
+    "schema_version": { "const": "thyquery.state.v1" },
+    "policy_version": { "const": "thyquery.policy.v1" },
+    "reducer_version": { "const": "thyquery.reducer.v1" },
+    "invocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["invocation_id", "host", "original_query_digest", "lifecycle"],
+      "properties": {
+        "invocation_id": { "type": "string", "minLength": 1 },
+        "host": { "enum": ["codex", "claude-code"] },
+        "original_query_digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "lifecycle": { "enum": ["ACTIVE", "CANCELLED", "TERMINAL"] }
+      }
+    },
+    "plan_preflight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verified", "receipt"],
+      "properties": {
+        "verified": { "type": "boolean" },
+        "receipt": { "type": ["string", "null"] }
+      }
+    },
+    "contract": { "$ref": "intent-contract.schema.json" },
+    "evidence": {
+      "type": "object",
+      "required": ["records"],
+      "properties": { "records": { "type": "array", "items": { "type": "object" } } },
+      "additionalProperties": false
+    },
+    "gaps": { "type": "array", "items": { "type": "object" } },
+    "action_space": { "type": "array", "items": { "type": "object" } },
+    "closure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "graph_ok",
+        "philosophical_ok",
+        "coverage_ok",
+        "risk_ok",
+        "conflict_ok",
+        "stable_ok",
+        "voi_ok",
+        "cal_ok",
+        "plan_input_ready",
+        "no_unauthorized_intent_drift",
+        "acceptance_contract_digest",
+        "acceptance_receipt"
+      ],
+      "properties": {
+        "graph_ok": { "type": "boolean" },
+        "philosophical_ok": { "type": "boolean" },
+        "coverage_ok": { "type": "boolean" },
+        "risk_ok": { "type": "boolean" },
+        "conflict_ok": { "type": "boolean" },
+        "stable_ok": { "type": "boolean" },
+        "voi_ok": { "type": "boolean" },
+        "cal_ok": { "type": "boolean" },
+        "plan_input_ready": { "type": "boolean" },
+        "no_unauthorized_intent_drift": { "type": "boolean" },
+        "acceptance_contract_digest": {
+          "type": ["string", "null"],
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "acceptance_receipt": {
+          "type": ["object", "null"],
+          "properties": {
+            "producer_kind": { "const": "USER" },
+            "source_ref": { "type": "string", "minLength": 1 },
+            "content_digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+            "response_fingerprint": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+            "authority_confirmed": { "const": true },
+            "comprehension_confirmed": { "const": true }
+          },
+          "required": [
+            "producer_kind",
+            "source_ref",
+            "content_digest",
+            "response_fingerprint",
+            "authority_confirmed",
+            "comprehension_confirmed"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "residual_acceptance": { "type": ["object", "null"] },
+    "budgets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["transition_initial", "transition_remaining"],
+      "properties": {
+        "transition_initial": { "type": "integer", "minimum": 0 },
+        "transition_remaining": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "progress": { "type": "object" },
+    "handoff": { "type": "object" },
+    "privacy": { "type": "object" },
+    "integrity": {
+      "type": "object",
+      "required": ["state_version", "state_hash", "idempotency", "event_ids", "failures", "terminal"],
+      "properties": {
+        "state_version": { "type": "integer", "minimum": 0 },
+        "state_hash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "idempotency": { "type": "object" },
+        "event_ids": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "failures": { "type": "array", "items": { "type": "object" } },
+        "terminal": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    }
+  }
+}
