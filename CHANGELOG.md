@@ -2,11 +2,11 @@
 
 ## v0.1.0 — 2026-08-03
 
-First release. Claude Code only.
+First release. The Claude Code package is published; the Codex package ships as source and is not installable yet.
 
 ### What this is
 
-An instruction-only Claude Code plugin that runs a bounded intent-resolution layer before the stock planner. You invoke it explicitly from an active Plan session; it asks one question per material gap, records what remains unresolved, and stops after one native plan without executing it.
+An instruction-only plugin that runs a bounded intent-resolution layer before the host's stock planner. You invoke it explicitly from an active Plan session; it asks one question per material gap, records what remains unresolved, and stops after one native plan without executing it.
 
 It ships no runtime. The package is a skill and five reference documents — no hooks, no MCP servers, no LSP servers, no background process. The host itself reports that inventory.
 
@@ -37,7 +37,7 @@ Conformance is bound to `claude-opus-5` in one environment. A pass on one model 
 
 **`EPISTEMIC_CLOSED` is unreachable in v1.** Full resolution requires a calibration this release does not ship, so `ACCEPTED_RESIDUAL` — a residual ledger you explicitly accept — is the only reachable success outcome. That is the honest shape of "resolved enough to plan", and it is stated in the instructions so the model cannot infer otherwise.
 
-**The Codex package is source, not a product.** It ships in the tree and is deliberately absent from the marketplace manifest. It has never been loaded or run.
+**The Codex package is not published yet.** It ships in the tree as source and is deliberately absent from the marketplace manifest. It has never been loaded or run. Publication is planned and waits on a Codex release exposing a session-only loader, so the package can be conformance-tested before anyone is offered an install path.
 
 ### Known behaviour worth knowing
 
