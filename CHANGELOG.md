@@ -4,10 +4,7 @@
 
 ### The Codex package is installable
 
-```sh
-codex plugin marketplace add umyunsang/ThyQuery
-codex plugin add codex-thyquery@thyquery
-```
+Open `/plugin` inside a Codex session, add `umyunsang/ThyQuery` as a marketplace, and install **ThyQuery for Codex** from the list. `codex plugin marketplace add` and `codex plugin add` do the same thing from a shell.
 
 It shipped as source for two releases because this repository never had a catalogue Codex could read. Codex 0.146.0 looks for one at `.agents/plugins/marketplace.json`, then `.agents/plugins/api_marketplace.json`, then `.claude-plugin/marketplace.json`, then `.cursor-plugin/marketplace.json`. Only the third existed, and it listed only the Claude package.
 

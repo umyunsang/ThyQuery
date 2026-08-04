@@ -30,16 +30,24 @@ That inventory is the host describing the package, not the package describing it
 
 ## Codex: install from the marketplace
 
-From a shell, in any directory:
+Start Codex, then open the plugin manager inside the session:
+
+```
+/plugin
+```
+
+Choose **Add Marketplace** and enter `umyunsang/ThyQuery` at the prompt. The catalogue's plugins then appear under **All Plugins**; select **ThyQuery for Codex** and install it. The same manager removes it later.
+
+`$thyquery` is available afterwards.
+
+The equivalent from a shell, if you would rather script it:
 
 ```sh
 codex plugin marketplace add umyunsang/ThyQuery
 codex plugin add codex-thyquery@thyquery
 ```
 
-`$thyquery` is then available, and `codex plugin remove codex-thyquery@thyquery` takes it back out.
-
-The install identifier is `codex-thyquery@thyquery`: the left half is the package name in `.codex-plugin/plugin.json`, the right half the catalogue name in `.agents/plugins/marketplace.json`. Codex prints both when it resolves the marketplace.
+Either way the install identifier is `codex-thyquery@thyquery`: the left half is the package name in `.codex-plugin/plugin.json`, the right half the catalogue name in `.agents/plugins/marketplace.json`. Codex prints both when it resolves the marketplace, and `codex plugin remove codex-thyquery@thyquery` is the shell form of removal.
 
 **Read this before installing.** The Claude package has been exercised against a model; this one has not. Loading is verified — the section below shows the host materializing the package — but no conformance case has ever been run on Codex, so how the skill behaves under a model is unmeasured. The two claims are separate and [support-matrix.md](support-matrix.md) keeps them separate.
 
@@ -68,8 +76,8 @@ Each host reads its own catalogue at the repository root, and each catalogue lis
 |---|---|---|---|---|
 | Claude Code | 1 | `/plugin marketplace add umyunsang/ThyQuery` | Registers this repository as a marketplace in your Claude Code configuration | Remove the marketplace from the `/plugin` manager |
 | Claude Code | 2 | `/plugin install thyquery@thyquery` | Installs the Claude package into `~/.claude/plugins` and makes `/thyquery:start` available in every session | Uninstall it from the `/plugin` manager |
-| Codex | 1 | `codex plugin marketplace add umyunsang/ThyQuery` | Adds a `[marketplaces.thyquery]` entry to `$CODEX_HOME/config.toml` (`~/.codex` by default) | `codex plugin marketplace remove thyquery` |
-| Codex | 2 | `codex plugin add codex-thyquery@thyquery` | Copies the package into `$CODEX_HOME/plugins/cache/thyquery/codex-thyquery/<version>` and enables it under `[plugins."codex-thyquery@thyquery"]` | `codex plugin remove codex-thyquery@thyquery` |
+| Codex | 1 | `/plugin` → **Add Marketplace** → `umyunsang/ThyQuery`<br>(shell: `codex plugin marketplace add umyunsang/ThyQuery`) | Adds a `[marketplaces.thyquery]` entry to `$CODEX_HOME/config.toml` (`~/.codex` by default) | Remove the marketplace from the same manager, or `codex plugin marketplace remove thyquery` |
+| Codex | 2 | `/plugin` → **All Plugins** → install **ThyQuery for Codex**<br>(shell: `codex plugin add codex-thyquery@thyquery`) | Copies the package into `$CODEX_HOME/plugins/cache/thyquery/codex-thyquery/<version>` and enables it under `[plugins."codex-thyquery@thyquery"]` | Remove it from the same manager, or `codex plugin remove codex-thyquery@thyquery` |
 
 Step 2 is the one that changes behaviour globally on either host. Until then the plugin only exists in sessions you explicitly point at it.
 
