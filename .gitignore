@@ -2,6 +2,9 @@
 .remember/
 .claude/
 
+# Written by the macOS Finder into any directory a user opens
+.DS_Store
+
 # Live-run scratch and results directories
 evals/results/
 node_modules/

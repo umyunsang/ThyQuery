@@ -1,18 +1,19 @@
 # Support Matrix
 
-Status date: 2026-08-03. Neither plugin is installed or enabled. The Claude package has been loaded session-only via `--plugin-dir` and one G0 case has been executed live on the Claude Code subscription; see the execution section below. Codex has never been loaded or run.
+Status date: 2026-08-04. Neither plugin is installed or enabled in a real host configuration. The Claude package has been loaded session-only via `--plugin-dir` and seven G0/G1 cases have been executed live on the Claude Code subscription; see the execution section below. The Codex package has now been **loaded** — installed into a disposable `CODEX_HOME` and materialized by the host — but never **run**: no model has ever executed its instructions.
 
 | Surface | Codex 0.146.0 | Claude Code 2.1.220 |
 |---|---|---|
 | Canonical invocation | `$thyquery <query>` | `/thyquery:start <query>` |
-| Package manifest | Static PASS | Native strict PASS |
+| Package manifest | **Native loader PASS** — `plugin add` resolved and installed `codex-thyquery@thyquery` from `.agents/plugins/marketplace.json` | Native strict PASS |
+| Marketplace discovery | **Verified** — `.agents/plugins/marketplace.json` takes precedence over the `.claude-plugin/` catalogue in the same repository; only the Codex package is offered | `.claude-plugin/marketplace.json`; the Codex catalogue is not read |
 | Skill frontmatter | Fallback Codex validator PASS | Native Claude strict PASS; implicit model invocation disabled |
 | Generated semantic parity | PASS | PASS |
 | Automatic routing | Absent by design | Absent by design |
 | Automatic Plan entry | Forbidden | Forbidden |
 | Plan evidence at runtime | `CONFORMANCE_UNTESTED` | **Confirmed both directions** — outside Plan fails closed (`A-G0-02`, `PLAN_MODE_REQUIRED`); inside `--permission-mode plan` the preflight finds and asserts Plan evidence before any action (`A-G0-01`) |
-| Session-only load into the host | Not established; no session-only local loader | **`LOAD_VERIFIED`** — `--plugin-dir` reports `thyquery 0.1.0`, `Source: thyquery@inline`, and `plugin list` stays empty afterwards |
-| Host-reported component inventory | Not established | **Skills 1, Agents 0, Hooks 0, MCP 0, LSP 0** — independent confirmation of the runtime boundary |
+| Disposable load into the host | **`LOAD_VERIFIED`** — no session-only loader exists, but `CODEX_HOME` redirects the whole configuration root, so a throwaway root installs a local candidate and `~/.codex/config.toml` hashes identically before and after | **`LOAD_VERIFIED`** — `--plugin-dir` reports `thyquery 0.1.0`, `Source: thyquery@inline`, and `plugin list` stays empty afterwards |
+| Host-reported component inventory | **8 files materialized** — `.codex-plugin/plugin.json`, `skills/thyquery/SKILL.md`, five references, `agents/openai.yaml`; nothing else | **Skills 1, Agents 0, Hooks 0, MCP 0, LSP 0** — independent confirmation of the runtime boundary |
 | Native question surface exists | `request_user_input`, named by the stock Plan template | `AskUserQuestion`, established by direct use |
 | Native question mode gating | Established: rejected in Default, permitted in Plan | Interactive Plan observed; **not exposed under `--print`** — requested via `--tools` yet the session reported `tools: ["Read"]` |
 | Native question **used to policy** at runtime | `CONFORMANCE_UNTESTED` | **`G0_PASS` interactively** (`A-G0-03`) — one question per boundary, correction/defer/cancel paths, no fixed questionnaire, no web substitution. Unreachable under `--print` where `AskUserQuestion` is absent |
@@ -22,13 +23,21 @@ Status date: 2026-08-03. Neither plugin is installed or enabled. The Claude pack
 | No edit under a write grant | `CONFORMANCE_UNTESTED` | **Verified** — `Write` available in both G1 sessions; scratch tree digest byte-identical, repository digests unchanged, only the host-designated plan file written |
 | `LVP@v3-A` runner disposition | `HOST_UNSUPPORTED_IN_CURRENT_APPROVAL_EPOCH`; isolation unresolved | `HOST_UNSUPPORTED_IN_CURRENT_APPROVAL_EPOCH`; live proposal blocked |
 
-Codex's inspected native CLI exposes no direct local `plugin validate` surface. The package passed the available local plugin-schema validator and project static checks, which is labeled static-only rather than native host conformance.
+Codex's native CLI still exposes no `plugin validate` surface, so there is no way to ask it to check a package without installing one. What replaced the static-only label is not a validator but an install: the loader accepted the package, resolved its source, and copied it into a cache, which is a stronger statement than any schema check and a weaker one than running it.
 
 Claude's `claude plugin validate --strict plugins/claude-thyquery` passed without installation or loading. That validates package structure, not runtime invocation, Plan proof, `AskUserQuestion`, plan provenance, or effect fencing.
 
 Any future runtime claim requires the separately approved, finite G0/G1 manifests in `tests/fixtures/codex/` and `tests/fixtures/claude/`.
 
 The repository-level [runner preparation](live-validation-runner.md) can dry-validate categorical fixtures and inspect fixed Codex help/version surfaces. Its green status is not copied into any runtime row above.
+
+## Codex host evidence, 2026-08-04
+
+The Codex package has now been loaded by the host itself, at zero model cost. A disposable `CODEX_HOME` took `codex plugin marketplace add .` followed by `codex plugin add codex-thyquery@thyquery`; the host resolved `./plugins/codex-thyquery` against the repository root, reported `"source": {"source": "local", ...}`, and materialized all eight package files into its cache. The probe root was then deleted and `~/.codex/config.toml` hashed identically before and after.
+
+This settles the isolation question that earlier revisions left open. The reasoning that produced `ISOLATION_METHOD_UNRESOLVED` was that no session-only loader exists — which is true and was the wrong thing to require. `CODEX_HOME` redirects the configuration root wholesale, so disposability comes from the root rather than from the loader, and the marketplace registration Codex insists on lands somewhere that gets deleted afterwards.
+
+Two consequences, and they are narrower than they look. Loading, source resolution, catalogue precedence, and package contents are now the host's claims rather than this project's. Behaviour is untouched: no model has executed a single instruction in this package, so every row above that describes what the skill *does* stays untested. The live manifests in `tests/fixtures/codex/` still record `ISOLATION_METHOD_UNRESOLVED` because they govern a live conformance run, which this was not, and because they are bound by hash to an approval receipt.
 
 ## Reading the question-surface rows
 

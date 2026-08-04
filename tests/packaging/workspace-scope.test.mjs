@@ -19,6 +19,7 @@ test("workspace top-level paths stay inside the approved allowlist", async () =>
   const names = (await readdir(ROOT)).sort();
   // Project-owned paths are the product surface and must always be present.
   const required = [
+    ".agents",
     ".claude-plugin",
     ".planning",
     ".gitignore",
@@ -39,8 +40,10 @@ test("workspace top-level paths stay inside the approved allowlist", async () =>
   // must still pass, and this guard must fail on product footprint only.
   // `.git` belongs here for the same reason — it is version-control metadata,
   // not product surface, and a released checkout carries it while an extracted
-  // archive does not.
-  const hostOwned = [".claude", ".git", ".remember"];
+  // archive does not. `.DS_Store` is the same category one step further out:
+  // the Finder writes it into any directory a user opens, so its presence says
+  // something about the machine and nothing about the product.
+  const hostOwned = [".claude", ".DS_Store", ".git", ".remember"];
 
   assert.deepEqual(
     names.filter((name) => !hostOwned.includes(name)),

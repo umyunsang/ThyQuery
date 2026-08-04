@@ -1,5 +1,41 @@
 # Changelog
 
+## v0.3.0 — 2026-08-04
+
+### The Codex package is installable
+
+```sh
+codex plugin marketplace add umyunsang/ThyQuery
+codex plugin add codex-thyquery@thyquery
+```
+
+It shipped as source for two releases because this repository never had a catalogue Codex could read. Codex 0.146.0 looks for one at `.agents/plugins/marketplace.json`, then `.agents/plugins/api_marketplace.json`, then `.claude-plugin/marketplace.json`, then `.cursor-plugin/marketplace.json`. Only the third existed, and it listed only the Claude package.
+
+### The reason recorded for the delay was wrong
+
+`docs/installation.md` said publication waited on "a Codex release exposing a session-only path for a local candidate". No such loader exists, which is what made the claim survive — it described a real absence, so nobody checked whether it was the actual obstacle. It was not. `CODEX_HOME` redirects the whole configuration root, so a throwaway root gives the same disposability a session-only loader would, and the marketplace registration Codex insists on lands somewhere that gets deleted.
+
+Verification used exactly that. The host resolved `./plugins/codex-thyquery` against the repository root, installed `codex-thyquery@thyquery`, and materialized all eight package files; `~/.codex/config.toml` hashed identically before and after. Four things that had been inferred from the binary are now the host's own answers: where a relative source resolves from, that the install identifier pairs the package name with the catalogue name, that `.agents/plugins/` outranks `.claude-plugin/` in the same repository, and that `interface.category` is accepted.
+
+### Installability is not conformance
+
+No model has executed a single instruction in the Codex package. Every behavioural row in `docs/support-matrix.md` stays untested for that host, and `README.md` and `docs/installation.md` say so where the install commands are rather than in a footnote. This is a deliberate departure from the standard the project previously set for itself — "Listing it would offer an install path for something whose behaviour is entirely unverified" — taken knowingly and recorded in `approval_receipt_CMP_v1_A.md`.
+
+### Guards, because one catalogue can be handed to the wrong host
+
+Codex falls back to reading `.claude-plugin/marketplace.json`, so listing a package in the wrong catalogue is a mistake a user experiences as `missing .codex-plugin/plugin.json`. `tools/validate-manifests.mjs` now checks that each catalogue names itself and an owner, that every entry's source resolves inside the repository to a directory carrying that host's manifest, that the entry name matches that manifest, and that neither catalogue lists the other host's package. `tests/packaging/marketplace.test.mjs` locks the rules in. Each guard was checked by making it fail before trusting it to pass.
+
+### Also
+
+- Both packages and the workspace now share one version, and the validator fails if they drift. They are generated from one specification; nothing made them agree before.
+
+### Package digests
+
+```
+plugins/codex-thyquery   sha256:17beab550b98bd48a22584520a3c936d39e3ea8fd8fd4928958ed2bef9583bad
+plugins/claude-thyquery  sha256:dbbb2982b2fae7bfc654bebe9b8682d8ac1ace343dc8b22c66cb373547088355
+```
+
 ## v0.2.0 — 2026-08-04
 
 ### Breaking: the invocation is now `/thyquery:start`

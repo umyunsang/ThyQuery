@@ -35,6 +35,78 @@ function requireFields(object, fields, prefix, errors) {
   }
 }
 
+// Each host discovers its catalogue at its own path and will only load a
+// package carrying its own manifest. Codex reads `.agents/plugins/` first but
+// falls back to `.claude-plugin/marketplace.json`, so a package listed in the
+// wrong catalogue is not merely untidy: it is offered to a loader that then
+// fails with "missing .codex-plugin/plugin.json" in front of the user.
+const MARKETPLACES = {
+  ".agents/plugins/marketplace.json": {
+    label: "codex marketplace",
+    manifest: ".codex-plugin/plugin.json",
+    foreignPackage: "plugins/claude-thyquery",
+  },
+  ".claude-plugin/marketplace.json": {
+    label: "claude marketplace",
+    manifest: ".claude-plugin/plugin.json",
+    foreignPackage: "plugins/codex-thyquery",
+  },
+};
+
+async function validateMarketplaces(errors) {
+  for (const [catalogue, host] of Object.entries(MARKETPLACES)) {
+    let marketplace;
+    try {
+      marketplace = await json(catalogue);
+    } catch {
+      errors.push(`${host.label}: ${catalogue} is missing or unreadable`);
+      continue;
+    }
+    requireFields(marketplace, ["name"], host.label, errors);
+    if (!marketplace.owner?.name) errors.push(`${host.label}: owner.name required`);
+    if (!Array.isArray(marketplace.plugins) || marketplace.plugins.length === 0) {
+      errors.push(`${host.label}: plugins must be a non-empty array`);
+      continue;
+    }
+
+    for (const entry of marketplace.plugins ?? []) {
+      requireFields(entry ?? {}, ["name", "source", "description"], `${host.label} entry`, errors);
+      if (typeof entry?.source !== "string") {
+        errors.push(`${host.label}: ${entry?.name} source must be a relative path string`);
+        continue;
+      }
+      // The base is the marketplace root — the repository — not the directory
+      // holding the manifest. Codex resolved `./plugins/codex-thyquery` to
+      // `<repo>/plugins/codex-thyquery` when it materialized the package, even
+      // though the manifest sits two levels down in `.agents/plugins/`.
+      const packageRoot = path.resolve(ROOT, entry.source);
+      if (packageRoot !== ROOT && !packageRoot.startsWith(ROOT + path.sep)) {
+        errors.push(`${host.label}: ${entry.name} source escapes the repository`);
+        continue;
+      }
+      if (packageRoot === path.join(ROOT, host.foreignPackage)) {
+        errors.push(`${host.label}: must not list ${host.foreignPackage}`);
+        continue;
+      }
+      let hosted;
+      try {
+        hosted = JSON.parse(await readFile(path.join(packageRoot, host.manifest), "utf8"));
+      } catch {
+        errors.push(`${host.label}: ${entry.name} source has no ${host.manifest}`);
+        continue;
+      }
+      // The loader keys installs on this pair: the probe installed
+      // `codex-thyquery@thyquery`, where the plugin half comes from the package
+      // manifest and the marketplace half from the catalogue name.
+      if (hosted.name !== entry.name) {
+        errors.push(
+          `${host.label}: entry ${entry.name} must match ${host.manifest} name ${hosted.name}`,
+        );
+      }
+    }
+  }
+}
+
 export async function validateManifests() {
   const errors = [];
   const codex = await json("plugins/codex-thyquery/.codex-plugin/plugin.json");
@@ -75,6 +147,11 @@ export async function validateManifests() {
     errors.push("codex: default prompt must start with $thyquery");
   }
   if (claude.name !== "thyquery") errors.push("claude: manifest namespace must be thyquery");
+  if (codex.version !== claude.version) {
+    errors.push("both packages are generated from one spec and must share a version");
+  }
+
+  await validateMarketplaces(errors);
 
   const codexSkill = await text(`plugins/codex-thyquery/${skillPath("plugins/codex-thyquery", "SKILL.md")}`);
   const claudeSkill = await text(`plugins/claude-thyquery/${skillPath("plugins/claude-thyquery", "SKILL.md")}`);

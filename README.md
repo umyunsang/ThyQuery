@@ -26,14 +26,21 @@ Your coding agent has the opposite reflex. Tell it to *clean this up* and it nev
 
 ## Install
 
-**Recommended** — inside a Claude Code session:
+**Claude Code** — inside a session:
 
 ```
 /plugin marketplace add umyunsang/ThyQuery
 /plugin install thyquery@thyquery
 ```
 
-One skill, about 120 tokens per session while idle. `/plugin` reports the inventory itself, so you do not have to take that on trust.
+**Codex** — from a shell:
+
+```sh
+codex plugin marketplace add umyunsang/ThyQuery
+codex plugin add codex-thyquery@thyquery
+```
+
+One skill and five reference documents, and nothing else — no hooks, no servers, no background process. Each host reports that inventory itself, so you do not have to take it on trust; on Claude Code it comes to about 120 tokens per session while idle.
 
 Prefer to read the source before installing anything? Load it for a single session instead:
 
@@ -47,19 +54,20 @@ claude --plugin-dir ThyQuery/plugins/claude-thyquery
 Enter Plan mode, then:
 
 ```
-/thyquery:start <your request, however vague>
+/thyquery:start <your request, however vague>   # Claude Code
+$thyquery <your request, however vague>         # Codex
 ```
 
 ## Hosts
 
 | Host | Invocation | Status |
 |---|---|---|
-| **Claude Code** | `/thyquery:start` | **Published** |
-| **Codex** | `$thyquery` | Source in the tree, publication planned |
+| **Claude Code** | `/thyquery:start` | **Published** — seven of nine cases pass on one model |
+| **Codex** | `$thyquery` | **Published** — the host loads it; behaviour is not yet measured |
 
 ## Status
 
-**v0.1.0 — pre-release.** Seven of nine conformance cases pass, on one model. What nobody has measured yet is the part you would care about most: whether the plans you end up with are better than the ones you would have got anyway.
+**v0.3.0 — pre-release.** On Claude Code, seven of nine conformance cases pass, on one model. On Codex nothing has been measured at all yet: the package installs and the host reports what it contains, which is a different claim from knowing how it behaves. And what nobody has measured on either host is the part you would care about most — whether the plans you end up with are better than the ones you would have got anyway.
 
 ## Docs
 
@@ -68,7 +76,7 @@ Enter Plan mode, then:
 ## Development
 
 ```sh
-npm test        # 81 tests, no dependencies
+npm test        # 89 tests, no dependencies
 npm run check   # tests, package validation, parity
 ```
 

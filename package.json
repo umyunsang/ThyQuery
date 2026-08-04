@@ -1,6 +1,6 @@
 {
   "name": "thyquery",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "description": "Plan-first intent-resolution contracts and two instruction-only host plugin candidates.",

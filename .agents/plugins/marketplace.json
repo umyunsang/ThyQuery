@@ -1,0 +1,13 @@
+{
+  "name": "thyquery",
+  "owner": {
+    "name": "ThyQuery Contributors"
+  },
+  "plugins": [
+    {
+      "name": "codex-thyquery",
+      "source": "./plugins/codex-thyquery",
+      "description": "Plan-first intent resolution for ambiguous Codex requests, ending after one native plan without execution."
+    }
+  ]
+}

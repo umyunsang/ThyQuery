@@ -35,8 +35,8 @@ No installation, plugin enablement, marketplace mutation, real host configuratio
 ## Artifact receipt
 
 - Volatile file/line counts are intentionally omitted; exact package and proposal fingerprints below are the acceptance receipts.
-- Codex package digest: `sha256:465f16316a2ad5083c91f4267e93446b3d7495eff72d01614c8802ef850ab7f1`.
-- Claude package digest: `sha256:63dea8e0095120b92d16d3079a7b77d267b607b720dd16bf564dc6fd6bfc482b`.
+- Codex package digest: `sha256:17beab550b98bd48a22584520a3c936d39e3ea8fd8fd4928958ed2bef9583bad`.
+- Claude package digest: `sha256:dbbb2982b2fae7bfc654bebe9b8682d8ac1ace343dc8b22c66cb373547088355`.
 - Codex live-manifest SHA-256: `02631cbc643301c598fc5493eb7e6bd318fbad72ec098caf17186b75e05ba239`.
 - Claude live-manifest SHA-256: `ee98db2c76a976dd52bc57426f5f784f7b9c4c19a65b91296b7799f3053cd5e2`.
 - Evaluation-arms SHA-256: `9e37a4206024c1cf3238c8f5faed1f19e638e9f7003af60340ff3ba2a4507647`.
@@ -85,7 +85,7 @@ The final independent review passed on both axes with no P0–P3 finding: core s
 ## Known risks and explicit unknowns
 
 1. Instruction text cannot by itself prove cryptographic lineage, deterministic guard execution, or effect fencing. G0/G1 remains mandatory.
-2. Codex 0.146.0 exposes marketplace installation but no direct local plugin-directory loader or validator in inspected help. Safe live loading is unresolved.
+2. Codex 0.146.0 exposes marketplace installation and no direct plugin-directory loader or validator, but `CODEX_HOME` redirects the whole configuration root, so a disposable root loads a local candidate without touching real state. That resolves package loading, not behaviour: what the loaded skill does under a model is still unmeasured.
 3. Claude session-only loading is documented, but interactive non-persistence is not: `--no-session-persistence` applies only to print mode. A stream-json harness needs separate approval and testing.
 4. Authoritative contract-to-native-plan receipts and exactly-once host effects remain unproven. The design claims at-most-one logical intent and stops on uncertainty.
 5. Closure, burden, stall, and efficacy thresholds remain uncalibrated; resolved success must fail closed where calibration is absent.

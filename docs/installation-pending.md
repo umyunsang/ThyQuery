@@ -4,7 +4,7 @@ The workspace packages are intentionally uninstalled.
 
 Current approval covers source implementation, deterministic no-network tests, and non-installing static validation only. It does not authorize:
 
-- Codex marketplace registration or plugin add;
+- Codex marketplace registration or plugin add **against a real configuration root**;
 - Claude plugin loading or enablement;
 - mutation of real host configuration or persistent session state;
 - interactive or paid model calls;
@@ -18,4 +18,8 @@ Before any installation instructions are executed, a separate approval must free
 
 The distinction matters because the absence of a written path was itself a defect — the plugin loaded through `--plugin-dir` in every run, and no user could have discovered that. Documenting it removes the mystery without weakening the gate.
 
-Claude G0/G1 conformance has since been exercised: seven of nine cases pass on `claude-opus-5` in an interactive session, with two excluded as not honestly runnable on the available harness. That satisfies the "should precede" clause above for Claude. It does not authorize installation, and Codex remains entirely unrun.
+Claude G0/G1 conformance has since been exercised: seven of nine cases pass on `claude-opus-5` in an interactive session, with two excluded as not honestly runnable on the available harness. That satisfies the "should precede" clause above for Claude. It does not authorize installation.
+
+**Codex is no longer entirely unrun, and the sentence that used to say so was retired on 2026-08-04.** A disposable `CODEX_HOME` was used to register the repository as a marketplace and install the Codex package, after which the throwaway root was deleted and the real `~/.codex/config.toml` was confirmed byte-identical. That was authorized separately and is recorded in `approval_receipt_CMP_v1_A.md`.
+
+Read the scope of that narrowly. It exercised the loader, not the plugin: no model call was made, no instruction in the package was executed, and no conformance case ran. The prohibition on live and paid runs, efficacy evaluation, and mutation of any real host configuration is unchanged, and the freeze requirements in the paragraph above still apply to anything beyond a disposable root.
