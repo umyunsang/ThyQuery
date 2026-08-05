@@ -33,12 +33,13 @@ Your coding agent has the opposite reflex. Tell it to *clean this up* and it nev
 /plugin install thyquery@thyquery
 ```
 
-**Codex** — inside a session:
+**Codex** — inside a session, open the plugin manager:
 
 ```
-/plugins marketplace add umyunsang/ThyQuery
-/plugins add codex-thyquery@thyquery
+/plugins
 ```
+
+Choose **Add Marketplace**, enter `umyunsang/ThyQuery`, then install **ThyQuery for Codex** from the list.
 
 One skill and five reference documents, and nothing else — no hooks, no servers, no background process. Each host reports that inventory itself, so you do not have to take it on trust; on Claude Code it comes to about 120 tokens per session while idle.
 
