@@ -68,7 +68,7 @@ $thyquery <your request, however vague>         # Codex
 
 ## Status
 
-**v0.3.0 — pre-release.** On Claude Code, seven of nine conformance cases pass, on one model. On Codex nothing has been measured at all yet: the package installs and the host reports what it contains, which is a different claim from knowing how it behaves. And what nobody has measured on either host is the part you would care about most — whether the plans you end up with are better than the ones you would have got anyway.
+**v0.3.1 — pre-release.** On Claude Code, seven of nine conformance cases pass, on one model. On Codex nothing has been measured at all yet: the package installs and the host reports what it contains, which is a different claim from knowing how it behaves. And what nobody has measured on either host is the part you would care about most — whether the plans you end up with are better than the ones you would have got anyway.
 
 ## Docs
 

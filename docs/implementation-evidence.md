@@ -35,8 +35,8 @@ No installation, plugin enablement, marketplace mutation, real host configuratio
 ## Artifact receipt
 
 - Volatile file/line counts are intentionally omitted; exact package and proposal fingerprints below are the acceptance receipts.
-- Codex package digest: `sha256:17beab550b98bd48a22584520a3c936d39e3ea8fd8fd4928958ed2bef9583bad`.
-- Claude package digest: `sha256:dbbb2982b2fae7bfc654bebe9b8682d8ac1ace343dc8b22c66cb373547088355`.
+- Codex package digest: `sha256:f5bd7b8190cb6283c7b0c067ea1718a09fb79aa7e8fea1e6238a7edb5ba92251`.
+- Claude package digest: `sha256:32527722b164b310ac3f4b3ba2bc067247267152310ee6e31ae50ef03bff2fca`.
 - Codex live-manifest SHA-256: `02631cbc643301c598fc5493eb7e6bd318fbad72ec098caf17186b75e05ba239`.
 - Claude live-manifest SHA-256: `ee98db2c76a976dd52bc57426f5f784f7b9c4c19a65b91296b7799f3053cd5e2`.
 - Evaluation-arms SHA-256: `9e37a4206024c1cf3238c8f5faed1f19e638e9f7003af60340ff3ba2a4507647`.

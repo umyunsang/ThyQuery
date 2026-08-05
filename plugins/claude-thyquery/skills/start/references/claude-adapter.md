@@ -2,7 +2,7 @@
 
 ## Canonical surface
 
-- Invocation: `/thyquery:start <query>` because both plugin namespace and skill name are `thyquery`.
+- Invocation: `/thyquery:start <query>` because Claude Code builds the command from the plugin namespace (`thyquery`) and the skill directory name (`start`).
 - `$ARGUMENTS`: original query payload.
 - Mode: stock Claude Code Plan must already be active and authoritatively evidenced.
 - Mode mutation: forbidden. Do not call `EnterPlanMode` or compose with `/plan`.

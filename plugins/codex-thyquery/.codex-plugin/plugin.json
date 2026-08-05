@@ -1,6 +1,6 @@
 {
   "name": "codex-thyquery",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Plan-first intent resolution for ambiguous Codex requests, ending after one native plan without execution.",
   "author": {
     "name": "ThyQuery Contributors"

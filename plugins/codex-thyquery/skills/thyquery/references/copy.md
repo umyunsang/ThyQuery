@@ -33,9 +33,23 @@ ThyQuery was cancelled. Say that there is no plan handoff and no follow-on work.
 - Korean: `ThyQuery를 취소했습니다. 플랜 핸드오프와 후속 작업은 없습니다.`
 - English: `ThyQuery is cancelled. No plan handoff and no follow-on work.`
 
+## `BLOCKED`
+
+No admissible action remains for a material gap owned by someone else, most often a user-owned gap the user declined to answer. Name the still-open gap and its owner, say that being stuck is not being finished, and state that no plan handoff is authorized. If a host-authenticated `NOT_APPLIED` handoff outcome caused the block, say that `BLOCKED` is absorbing and can never later be rewritten as applied.
+
+- Korean: `허용되는 다음 조치가 없어 중단했습니다. 남은 공백과 그 소유자는 위에 적었습니다. 막힌 것은 끝난 것이 아니며, 플랜 핸드오프는 수행하지 않았습니다.`
+- English: `Stopped: no admissible action remains. The open gap and its owner are stated above. Being stuck is not the same as being finished, and no plan handoff was performed.`
+
 ## `STATE_CORRUPT`
 
 State the exact integrity reason and recovery boundary. Do not guess, silently rebuild, or continue.
+
+## `HOST_CAPABILITY_CONTRADICTION`
+
+A contract-required host capability is unavailable in this session. Name the exact missing capability and stop; most concretely, say when the required native structured-question surface is not callable. Do not fabricate a structured choice or use research in place of a user-owned answer, and authorize no plan handoff.
+
+- Korean: `계약에 필요한 호스트 기능을 이 세션에서 쓸 수 없어 중단했습니다. 무엇이 없는지는 위에 적었습니다. 그 자리를 대신할 것을 지어내지 않았고, 플랜 핸드오프도 수행하지 않았습니다.`
+- English: `Stopped: a capability the contract requires is not available in this session. What is missing is stated above. Nothing was fabricated in its place, and no plan handoff was performed.`
 
 ## `HANDOFF_OUTCOME_UNKNOWN`
 

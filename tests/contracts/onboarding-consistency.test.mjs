@@ -50,11 +50,13 @@ test("onboarding and the closure policy agree that v1 cannot reach resolved clos
   );
 });
 
+const HOSTS = [
+  ["claude-thyquery", "start"],
+  ["codex-thyquery", "thyquery"],
+];
+
 test("both outcome-copy files unpin output language instead of fixing one", async () => {
-  for (const [host, skillDir] of [
-    ["claude-thyquery", "start"],
-    ["codex-thyquery", "thyquery"],
-  ]) {
+  for (const [host, skillDir] of HOSTS) {
     const copy = await read(`../../plugins/${host}/skills/${skillDir}/references/copy.md`);
     assert.match(
       copy,
@@ -71,4 +73,64 @@ test("both outcome-copy files unpin output language instead of fixing one", asyn
     assert.match(copy, /English/u, `${host} copy must carry an English reference rendering`);
     assert.match(copy, /[가-힣]/u, `${host} copy must keep the Korean reference rendering`);
   }
+});
+
+// Both skills promise that every invocation ends with one typed outcome "with
+// its reference copy", and for two outcomes that copy did not exist: `BLOCKED`
+// and `HOST_CAPABILITY_CONTRADICTION` were named as emittable and defined
+// nowhere, so reaching either left the model to improvise a terminal the user
+// would read as authoritative. The list is the non-success set from
+// spec/product-contract.md, which is what makes this check track the spec
+// rather than the two outcomes that happened to be missing.
+test("every non-success outcome a skill can emit has copy to emit it with", async () => {
+  const nonSuccessOutcomes = [
+    "PLAN_MODE_REQUIRED",
+    "CANCELLED",
+    "BLOCKED",
+    "STALLED",
+    "RESOURCE_EXHAUSTED",
+    "STATE_CORRUPT",
+    "HOST_CAPABILITY_CONTRADICTION",
+    "HANDOFF_OUTCOME_UNKNOWN",
+  ];
+
+  for (const [host, skillDir] of HOSTS) {
+    const copy = await read(`../../plugins/${host}/skills/${skillDir}/references/copy.md`);
+    for (const outcome of nonSuccessOutcomes) {
+      assert.ok(
+        copy.includes(`## \`${outcome}\``),
+        `${host} copy must define the non-success outcome ${outcome}`,
+      );
+    }
+
+    // The outcomes a user actually meets carry both renderings. Asserting on the
+    // section rather than the file stops a rendering elsewhere from covering for
+    // one that is missing here.
+    for (const outcome of ["BLOCKED", "HOST_CAPABILITY_CONTRADICTION"]) {
+      const marker = `## \`${outcome}\``;
+      const remainder = copy.slice(copy.indexOf(marker));
+      const nextHeading = remainder.indexOf("\n## ", marker.length);
+      const section = nextHeading === -1 ? remainder : remainder.slice(0, nextHeading);
+      assert.match(section, /- Korean: `[^\n]+`/u, `${host} ${outcome} needs Korean copy`);
+      assert.match(section, /- English: `[^\n]+`/u, `${host} ${outcome} needs English copy`);
+    }
+  }
+});
+
+// The v0.2.0 rename moved the skill directory to `start` and changed the command
+// to `/thyquery:start`, but the adapter kept the sentence explaining the old
+// command — so a file the skill loads as policy asserted the very condition the
+// rename removed. Binding the claim to the frontmatter it describes is what
+// makes the next rename fail here instead of shipping.
+test("the Claude adapter derives the invocation from what actually names it", async () => {
+  const skill = await read("../../plugins/claude-thyquery/skills/start/SKILL.md");
+  const adapter = await read(
+    "../../plugins/claude-thyquery/skills/start/references/claude-adapter.md",
+  );
+  assert.match(skill, /^name: start$/mu);
+  assert.match(
+    adapter,
+    /plugin namespace \(`thyquery`\) and the skill directory name \(`start`\)/u,
+  );
+  assert.doesNotMatch(adapter, /both plugin namespace and skill name are `thyquery`/u);
 });

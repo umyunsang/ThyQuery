@@ -1,5 +1,28 @@
 # Changelog
 
+## v0.3.1 — 2026-08-05
+
+### Every emittable non-success now has reference copy
+
+Both skills required every invocation to end with one typed outcome and its reference copy, but `BLOCKED` and `HOST_CAPABILITY_CONTRADICTION` had no copy. Both host packages now carry Korean and English renderings for them. `BLOCKED` names the still-open material gap and its owner, keeps host-authenticated `NOT_APPLIED` absorbing, and does not pretend that being stuck is being finished. `HOST_CAPABILITY_CONTRADICTION` names the required host surface that is actually unavailable and refuses to fabricate a structured choice or substitute research for an answer the user owns. Neither outcome authorizes a plan handoff.
+
+### The Claude invocation now explains itself correctly
+
+The v0.2.0 rename changed the Claude skill directory from `thyquery` to `start`, which changed the command to `/thyquery:start`. Its adapter changed the command string but retained the old explanation that both namespace and skill name were `thyquery`. The adapter now records the actual derivation: plugin namespace `thyquery`, skill directory `start`. The Codex adapter's `$thyquery` line was already correct and remains unchanged.
+
+### Both repairs are now guarded
+
+`tests/contracts/onboarding-consistency.test.mjs` checks the non-success set from `spec/product-contract.md` against the sections in both copy files, so the guard tracks the specification rather than the two outcomes that happened to be missing. It also binds the adapter's derivation to the frontmatter it describes, which is what would have caught the rename. Each assertion was made to fail before it was trusted to pass.
+
+The renderings stay the length of the ones already in the file. An earlier draft carried fill-in-the-blank slots and folded the absorbing-`NOT_APPLIED` rule into the user-facing string; both were removed. That rule is an integrity property and belongs in the instruction paragraph, where it already was — a user meeting `BLOCKED` needs to know what is still open and who owns it, not the state machine's vocabulary.
+
+### Package digests
+
+```
+plugins/codex-thyquery   sha256:f5bd7b8190cb6283c7b0c067ea1718a09fb79aa7e8fea1e6238a7edb5ba92251
+plugins/claude-thyquery  sha256:32527722b164b310ac3f4b3ba2bc067247267152310ee6e31ae50ef03bff2fca
+```
+
 ## v0.3.0 — 2026-08-04
 
 ### The Codex package is installable
