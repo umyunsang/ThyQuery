@@ -33,11 +33,11 @@ That inventory is the host describing the package, not the package describing it
 Start Codex, then run these inside the session:
 
 ```
-/plugin marketplace add umyunsang/ThyQuery
-/plugin add codex-thyquery@thyquery
+/plugins marketplace add umyunsang/ThyQuery
+/plugins add codex-thyquery@thyquery
 ```
 
-`$thyquery` is then available, and `/plugin` with no arguments opens the manager for removing it later.
+`$thyquery` is then available, and `/plugins` with no arguments opens the manager for removing it later.
 
 The equivalent from a shell, if you would rather script it:
 
@@ -75,8 +75,8 @@ Each host reads its own catalogue at the repository root, and each catalogue lis
 |---|---|---|---|---|
 | Claude Code | 1 | `/plugin marketplace add umyunsang/ThyQuery` | Registers this repository as a marketplace in your Claude Code configuration | Remove the marketplace from the `/plugin` manager |
 | Claude Code | 2 | `/plugin install thyquery@thyquery` | Installs the Claude package into `~/.claude/plugins` and makes `/thyquery:start` available in every session | Uninstall it from the `/plugin` manager |
-| Codex | 1 | `/plugin marketplace add umyunsang/ThyQuery` | Adds a `[marketplaces.thyquery]` entry to `$CODEX_HOME/config.toml` (`~/.codex` by default) | Remove the marketplace from the `/plugin` manager |
-| Codex | 2 | `/plugin add codex-thyquery@thyquery` | Copies the package into `$CODEX_HOME/plugins/cache/thyquery/codex-thyquery/<version>` and enables it under `[plugins."codex-thyquery@thyquery"]` | Uninstall it from the `/plugin` manager |
+| Codex | 1 | `/plugins marketplace add umyunsang/ThyQuery` | Adds a `[marketplaces.thyquery]` entry to `$CODEX_HOME/config.toml` (`~/.codex` by default) | Remove the marketplace from the `/plugins` manager |
+| Codex | 2 | `/plugins add codex-thyquery@thyquery` | Copies the package into `$CODEX_HOME/plugins/cache/thyquery/codex-thyquery/<version>` and enables it under `[plugins."codex-thyquery@thyquery"]` | Uninstall it from the `/plugins` manager |
 
 Step 2 is the one that changes behaviour globally on either host. Until then the plugin only exists in sessions you explicitly point at it.
 

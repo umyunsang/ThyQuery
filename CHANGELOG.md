@@ -27,7 +27,7 @@ plugins/claude-thyquery  sha256:32527722b164b310ac3f4b3ba2bc067247267152310ee6e3
 
 ### The Codex package is installable
 
-Open `/plugin` inside a Codex session, add `umyunsang/ThyQuery` as a marketplace, and install **ThyQuery for Codex** from the list. `codex plugin marketplace add` and `codex plugin add` do the same thing from a shell.
+Run `/plugins marketplace add umyunsang/ThyQuery` and then `/plugins add codex-thyquery@thyquery` inside a Codex session. `codex plugin marketplace add` and `codex plugin add` do the same thing from a shell.
 
 It shipped as source for two releases because this repository never had a catalogue Codex could read. Codex 0.146.0 looks for one at `.agents/plugins/marketplace.json`, then `.agents/plugins/api_marketplace.json`, then `.claude-plugin/marketplace.json`, then `.cursor-plugin/marketplace.json`. Only the third existed, and it listed only the Claude package.
 

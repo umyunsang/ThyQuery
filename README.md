@@ -36,8 +36,8 @@ Your coding agent has the opposite reflex. Tell it to *clean this up* and it nev
 **Codex** — inside a session:
 
 ```
-/plugin marketplace add umyunsang/ThyQuery
-/plugin add codex-thyquery@thyquery
+/plugins marketplace add umyunsang/ThyQuery
+/plugins add codex-thyquery@thyquery
 ```
 
 One skill and five reference documents, and nothing else — no hooks, no servers, no background process. Each host reports that inventory itself, so you do not have to take it on trust; on Claude Code it comes to about 120 tokens per session while idle.
